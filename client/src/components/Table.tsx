@@ -1,0 +1,159 @@
+import * as React from 'react';
+import styled from 'styled-components';
+
+import {
+  Block,
+  Blocks, 
+  DebugOptions,
+  Generator,
+  ICreate, 
+  IGenerator,
+  IPosition,
+  IRLGMetaDataArgs,
+  ISize,
+  Params,
+  PositionRef,
+  RLGLayout, 
+  RLGPanel,
+  updateParamLocation,
+} from 'react-layout-generator'
+
+import { Props } from 'react-layout-generator/dist/types/types';
+import cssColor from '../assets/colors';
+
+// tslint:disable-next-line:variable-name
+const Title = styled.span`
+  font-family: Arial, Helvetica, sans-serif;
+  background: transparent;
+  color: ${cssColor.light};
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+`
+
+interface ITableProps extends React.HTMLProps<HTMLDivElement> {
+  name: string;
+  title: string;
+  containersize: ISize;
+  rowData: string[][];
+}
+
+export default class Table extends React.Component<ITableProps> {
+  private g: IGenerator;
+  private params: Params;
+
+  constructor(props: ITableProps) {
+    super(props);
+
+    this.params = new Params({
+      // tslint:disable-next-line:object-literal-sort-keys
+      name: 'props.name', initialValues: [
+        ['containersize', { width: 0, height: 0 }],
+        ['titleHeight', 36],
+        ['rowHeight', 24]
+      ]
+    });
+    this.g = new Generator('chart', this.init, this.params, this.create);
+  }
+
+  public render() {
+
+    return (
+      <RLGLayout
+        name={this.props.name}
+        debug={DebugOptions.none}
+        g={this.g}
+        containersize={this.props.containersize}
+      >
+        <RLGPanel data-layout={{ name: 'title' }} style={{ backgroundColor: 'black' }} >
+          {(args: IRLGMetaDataArgs) => (
+              <>
+                <Title>{this.props.name}</Title>
+                {this.createRows()}
+              </>
+         )}
+        </RLGPanel>
+      </RLGLayout>
+    );
+  }
+
+  private createRows = () => {
+    return null;
+  }
+
+  private init = (g: IGenerator): Blocks => {
+
+    const containersize = this.params.get('containersize') as ISize;
+    const titleHeight = this.params.get('titleHeight') as number;
+    const rowHeight = this.params.get('rowHeight') as number;
+    // const footerHeight = this.params.get('footerHeight') as number;
+
+    const blocks = g.blocks();
+
+    if (this.params.changed()) {
+      // update Layout for each update
+      blocks.map.forEach((block) => {
+        block.touch();
+      });
+    }
+
+    if (containersize) {
+
+      const title: IPosition = {
+        location: { x: 0, y: 0 },
+        size: { width: containersize.width, height: titleHeight },
+        // tslint:disable-next-line:object-literal-sort-keys
+        editor: {
+          edits: [
+            { ref: PositionRef.position, variable: 'titleHeight', updateParam: updateParamLocation }
+          ]
+        }
+      }
+      // console.log('cardSize', cardSize);
+
+      blocks.set('title', title, g);
+
+      const row: IPosition = {
+        location: { x: 0, y: titleHeight },
+        size: { width: containersize.width, height: rowHeight },
+        // tslint:disable-next-line:object-literal-sort-keys
+        positionChildren: this.positionRowChildren
+      }
+
+      blocks.set('row', row, g);
+
+    }
+    return blocks;
+  }
+
+  private positionRowChildren = (block: Block, g: IGenerator, index: number, props: Props) => {
+    // Return a Layout relative to block starting at position at (0, 0)
+
+    const rowHeight = this.params.get('rowHeight') as number;
+    const containersize = this.params.get('containersize') as ISize;
+    const titleHeight = this.params.get('titleHeight') as number;
+
+    // These children get placed vertically based on index
+    const child: IPosition = {
+      location: { x: 0, y: titleHeight + index * rowHeight },
+      size: { width: containersize.width, height: rowHeight }
+    };
+
+    // This block is temp and will not be stored in blocks
+    return new Block('temp', child, g);
+  }
+
+  private create(args: ICreate): Block {
+
+    if (!args.position) {
+      // tslint:disable-next-line:no-console
+      console.error(`TODO default position ${args.name}`);
+    }
+
+    const block = args.g.blocks().set(args.name, args.position, args.g);
+
+    return block;
+  }
+}
