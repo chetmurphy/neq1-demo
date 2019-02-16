@@ -1,17 +1,22 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
 import {
-  DebugOptions,
+  DebugOptions, 
   IEditHelperProps,
   OverflowOptions,
-  // ParamValue,
+  ParamValue,
   RLGLayout,
   rollGenerator,
+  rollHook,
   ServiceOptions,
-  Status,
-  Unit
-} from "react-layout-generator";
+  Status
+} from 'react-layout-generator'
+
+import * as data from '../../assets/data/params.json'
+
+// const Title = styled.h2`
+// `
 
 // tslint:disable-next-line:variable-name
 const Description = styled.div`
@@ -20,84 +25,87 @@ const Description = styled.div`
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.25rem;
-`;
+`
 
 interface IIntroState {
   update: number;
 }
 
-export default class Intro extends React.Component<
-  IEditHelperProps,
-  IIntroState
-> {
-  private g = rollGenerator("rlg.intro");
-  private edit: boolean = false;
+export default class Intro extends React.Component<IEditHelperProps, IIntroState> {
+
+  private _g = rollGenerator('rlg.intro');
+  private _edit: boolean = false;
 
   constructor(props: IEditHelperProps) {
     super(props);
 
     this.state = { update: 0 };
+
+    const hooks = this._g.hooks()
+    hooks.set('layer2', rollHook('layer2', 
+    {'velocity': {x: .25, y: -.50}}
+    , this._g))
   }
 
   public componentDidMount() {
     // console.log('EditHelpers load Intro');
-    this.props
-      .editHelper()
-      .load([
-        {
-          name: "edit",
-          command: this.setEdit,
-          status: this.edit ? Status.up : Status.down
-        }
-      ]);
+    this.props.editHelper().load([
+      { name: 'edit', command: this.setEdit, status: this._edit ? Status.up : Status.down }
+    ])
   }
 
   public setEdit = (status: Status) => {
     if (status === Status.down) {
       status = Status.up;
-      this.edit = true;
+      this._edit = true
     } else {
       status = Status.down;
-      this.edit = false;
+      this._edit = false
     }
 
     // this.grid(this._gridUnit)
     // this._g.clear();
-    this.setState({ update: this.state.update + 1 });
+    this.setState({ update: this.state.update + 1 })
 
     return status;
-  };
+  }
 
   public render() {
     return (
       <RLGLayout
-        name={"RLGLayout.intro.example"}
-        service={this.edit ? ServiceOptions.edit : ServiceOptions.none}
+        name={'RLGLayout.intro.example'}
+        service={this._edit ? ServiceOptions.edit : ServiceOptions.none}
         debug={DebugOptions.none}
         params={[
-          ["containersize", { width: 1434, height: 714 }],
-          ["animationStart", 0],
-          ["animationTime", 0],
-          ["animationLast", 0],
-          ["velocity", 0.1],
-          ["update", 0],
-          ["frameHeight", 3917.1],
-          ["deltaTime", 16.73699999999735],
-          ["animate", 1],
-          ["velocity", {x: 0, y: 0.05}]
+          ...data['rlg.intro'] as Array<[string, ParamValue]>,
+          ['velocity', {x: 0.01, y: 0.05}]
         ]}
         animate={{ active: true }}
-        g={this.g}
+        g={this._g}
         overflowX={OverflowOptions.hidden}
         overflowY={OverflowOptions.hidden}
       >
         {this.content()}
-      </RLGLayout>
+
+        <div
+          data-layout={{
+            name: "implementation",
+            position: {
+              origin: { x: 100, y: 100 },
+              location: { left: '50%', top: '50%', width: 140, height: 24 }
+            }
+          }}
+          data-layer={2}
+        >
+          <span>Second Animation</span>
+        </div>
+      </RLGLayout >
     );
   }
 
   public content = () => {
-    let index = 1000;
+
+    let index = 1000
     const features: any[] = [
       <div key={`${++index}`}>Template Support.</div>,
       <div key={`${++index}`}>Dashboard</div>,
@@ -135,45 +143,41 @@ export default class Intro extends React.Component<
       <div key={`${++index}`}>Custom Animation Behavior</div>,
       <div key={`${++index}`}>Physics Engine Capable</div>,
       <div key={`${++index}`}>Debug Options</div>,
-      <div key={`${++index}`}>Overlay Support</div>
-    ];
-    const jsx = [];
-    let i = 0;
-    let j = 0;
+      <div key={`${++index}`}>Overlay Support</div>,
+    ]
+    const jsx = []
+    let i = 0
+    let j = 0
     while (i < features.length) {
-      const name = `${i++}`;
-      let col = 25;
-      if (j === 1) {
-        col = 75;
-      }
-      if (j === 2) {
-        col = 50;
-      }
+      const name = `${i++}`
+      let col = -15
+      if (j === 1) { col = 15 }
+      if (j === 2) { col = 45 }
+      if (j === 3) { col = 85 }
+      if (j === 4) { col = 115 }
       jsx.push(
         <div
           key={name}
+
           data-layout={{
             name,
             position: {
               origin: { x: 50, y: 50 },
-              location: { x: col, y: i * 15, unit: Unit.percent },
-              size: { width: 250, height: 100, unit: Unit.unmanagedHeight }
+              location: { left: `${col}%`, top: `${(i * 5)}%`, width: 250, height: '100u' },
             }
           }}
         >
-          <Description>{features[i]}</Description>
+          <Description>
+            {features[i]}
+          </Description>
         </div>
-      );
-
-      // Distribute horizontally
-      j += 1;
-      if (j > 2) {
-        j = 0;
-      }
+      )
+      j += 1
+      if (j > 4) { j = 0 }
     }
 
-    return jsx;
-  };
+    return jsx
+  }
 }
 
 export const introJSX = (props: IEditHelperProps): JSX.Element => {

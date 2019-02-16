@@ -61,7 +61,9 @@ export default class Note extends React.Component<INoteProps, INoteState> {
     // update
     this.props.block!.update({
       x: this.startLocation.x + deltaX,
-      y: this.startLocation.y + deltaY
+      y: this.startLocation.y + deltaY,
+      width: ,
+      height: 
     });
 
     // this.setState({update: this.state.update + 1});
@@ -76,7 +78,7 @@ export default class Note extends React.Component<INoteProps, INoteState> {
 
     // initialize 
     this.startOrigin = { x: event.pageX, y: event.pageY }
-    const r = this.props.block!.rect();
+    const r = this.props.block!.rect;
     this.startLocation = { x: r.x, y: r.y };
   }
 

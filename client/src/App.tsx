@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+// import { Params } from 'router5/types/types/base'
+// import routerStore from './stores/RouterStore';
+
 import styled from 'styled-components';
 
 // styles
@@ -15,8 +18,7 @@ import {
   OverflowOptions,
   RLGLayout,
   RLGPanel,
-  ServiceOptions,
-  Unit
+  ServiceOptions
 } from 'react-layout-generator'
 
 // Examples
@@ -30,11 +32,10 @@ import ToolBar from './components/ToolBar';
 // import Editable from './editable/Editable';
 // import Grid from './grid/Grid';
 import Intro from './pages/intro/Intro';
-// import Solitaire from './solitaire/Solitaire';
-// import Solitaire2 from './solitaire2/Solitaire';
+import Solitaire from './pages/solitaire/Solitaire';
 
 // Icons
-import { FaRegEdit, FaRegSave } from 'react-icons/fa';
+import { FaBook, FaCode, FaGithub, FaInfoCircle, FaRegEdit, FaRegSave } from 'react-icons/fa';
 import { IconBaseProps } from 'react-icons/lib/iconBase';
 import { MdContentCopy, MdContentCut, MdContentPaste, MdRedo, MdUndo } from 'react-icons/md'
 import {  } from 'react-layout-generator';
@@ -54,6 +55,16 @@ const Title = styled.h2`
   overflow: 'hidden';
   word-break: keep-all;
 `
+
+// tslint:disable-next-line:variable-name
+export const Button = styled.button`
+  font-size: 36;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: ${cssColor.light};
+`
+
 // tslint:disable-next-line:max-classes-per-file
 export default class App extends React.Component<{}, { app: JSX.Element }> {
 
@@ -91,6 +102,11 @@ export default class App extends React.Component<{}, { app: JSX.Element }> {
     this.setState({ app: element });
   }
 
+  // public link = (name: string, routeParams: Params) => {
+  //   this.editHelper.clear();
+  //   routerStore.navigate(name, routeParams)
+  // }
+
   public getEditHelper = () => {
     return this.editHelper;
   }
@@ -112,13 +128,29 @@ export default class App extends React.Component<{}, { app: JSX.Element }> {
             )}
           </RLGPanel>
 
+          <div data-layout={{
+              name: "appInfo",
+              position: {
+                origin: { x: 100, y: 0 },
+                location: { left: '99%', top: '1%', width: 24, height: 24 }
+              }
+            }}
+            onClick={this.onAppInfoClick}
+          >
+           <FaInfoCircle style={{fontSize: 24,
+              padding: 0,
+              background: 'transparent',
+              border: 'none',
+              color: 'yellow'}}/>
+          </div>
+
           <div data-layout={{ name: 'header' }} style={{ backgroundColor: cssColor.dark }}>
             <NavBar elements={[
               // if props change then the props should be functions that return the correct value
               { component: <Intro editHelper={this.getEditHelper} />, name: 'Home' },
               // { component: <DeskTop editHelper={this.getEditHelper} />, name: 'DeskTop' },
               // { component: <CardDeck editHelper={this.getEditHelper} />, name: 'CardDeck' },
-              // { component: <Solitaire editHelper={this.getEditHelper} />, name: 'Solitaire' },
+              { component: <Solitaire editHelper={this.getEditHelper} />, name: 'Solitaire' },
               // { component: <Solitaire2 editHelper={this.getEditHelper} />, name: 'Solitaire2' },
               // { component: <Grid editHelper={this.getEditHelper} />, name: 'Grid' },
               // { component: <Chart editHelper={this.getEditHelper} />, name: 'Chart' },
@@ -167,6 +199,12 @@ export default class App extends React.Component<{}, { app: JSX.Element }> {
     )
   }
 
+  private onAppInfoClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    event.preventDefault();
+    console.log(`onAppInfoClick`)
+  }
+
   private overlay() {
 
     return (
@@ -183,13 +221,66 @@ export default class App extends React.Component<{}, { app: JSX.Element }> {
           name: "implementation",
           position: {
             origin: { x: 100, y: 100 },
-            location: { x: 100, y: 100, unit: Unit.percent },
-            size: { width: 140, height: 24 }
+            location: { left: '95%', top: '100%', width: 140, height: 24 }
           }
         }}
       >
         {`${process.env.REACT_APP_RLG_VERSION}`}
       </div>
+
+      <a data-layout={{
+          name: "github",
+          position: {
+            origin: { x: 100, y: 100 },
+            location: { left: '95%', top: '99.5%', width: 24, height: 24 }
+          }
+        }}
+        href="https://github.com/chetmurphy/RLG-Demo"
+      >
+        <FaCode style={{fontSize: 24,
+          padding: 0,
+          background: 'transparent',
+          border: 'none',
+          color: 'olive'
+        }}
+          />
+      </a>
+
+      <a data-layout={{
+          name: "Demo",
+          position: {
+            origin: { x: 100, y: 100 },
+            location: { left: '97%', top: '99.5%', width: 24, height: 24 }
+          }
+        }}
+        href="https://github.com/chetmurphy/react-layout-generator"
+      >
+        <FaGithub style={{fontSize: 24,
+          padding: 0,
+          background: 'transparent',
+          border: 'none',
+          color: 'olive'
+        }}
+          />
+      </a>
+
+      <a data-layout={{
+          name: "Docs",
+          position: {
+            origin: { x: 100, y: 100 },
+            location: { left: '99%', top: '99.5%', width: 24, height: 24 }
+          }
+        }}
+        href="https://chetmurphy.github.io/react-layout-generator/"
+      >
+        <FaBook style={{fontSize: 24,
+          padding: 0,
+          background: 'transparent',
+          border: 'none',
+          color: 'olive'
+        }}
+          />
+      </a>
     </RLGLayout>
     )
   }

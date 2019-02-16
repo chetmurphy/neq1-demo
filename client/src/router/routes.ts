@@ -1,15 +1,14 @@
-import { Route } from 'router5';
+import { Route } from "router5";
 
-import { IEditHelperProps } from 'react-layout-generator';
-import {introJSX} from '../pages/intro/Intro'
+import { IEditHelperProps } from "react-layout-generator";
+import { introJSX } from "../pages/intro/Intro";
 
 export interface IRouteNavigationProps {
   menuInverted: boolean;
 }
 
 // tslint:disable-next-line:no-empty-interface
-export interface ISceneComponentProps {
-}
+export interface ISceneComponentProps {}
 
 export interface IExtendedRoute extends Route {
   component: (props: IEditHelperProps) => JSX.Element;
@@ -18,30 +17,30 @@ export interface IExtendedRoute extends Route {
 }
 
 export const routes: IExtendedRoute[] = [
-  { 
-    name: 'intro', 
-    path: '/intro', 
+  {
+    name: "intro",
+    path: "/intro",
     component: introJSX,
     // navigationProps: { menuInverted: true },
-    sceneComponentProps: {} 
-  },
-  // { 
-  //   name: 'register', 
-  //   path: '/register', 
+    sceneComponentProps: {}
+  }
+  // {
+  //   name: 'register',
+  //   path: '/register',
   //   component: Register,
   //   navigationProps: { menuInverted: true },
   //   sceneComponentProps: {}
   // },
-  // { 
-  //   name: 'confirmEmail', 
-  //   path: '/confirm-email?name&vcode', 
+  // {
+  //   name: 'confirmEmail',
+  //   path: '/confirm-email?name&vcode',
   //   component: ConfirmEmail,
   //   navigationProps: { menuInverted: true },
   //   sceneComponentProps: {}
   // },
-  // { 
-  //   name: 'newTile', 
-  //   path: '/newTile', 
+  // {
+  //   name: 'newTile',
+  //   path: '/newTile',
   //   component: NewTile,
   //   navigationProps: { menuInverted: true },
   //   sceneComponentProps: {}

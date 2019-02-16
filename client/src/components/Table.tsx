@@ -8,6 +8,7 @@ import {
   Generator,
   ICreate, 
   IGenerator,
+  IGenericProps,
   IPosition,
   IRLGMetaDataArgs,
   ISize,
@@ -18,7 +19,6 @@ import {
   updateParamLocation,
 } from 'react-layout-generator'
 
-import { Props } from 'react-layout-generator/dist/types/types';
 import cssColor from '../assets/colors';
 
 // tslint:disable-next-line:variable-name
@@ -102,8 +102,7 @@ export default class Table extends React.Component<ITableProps> {
     if (containersize) {
 
       const title: IPosition = {
-        location: { x: 0, y: 0 },
-        size: { width: containersize.width, height: titleHeight },
+        location: { left: 0, top: 0, width: containersize.width, height: titleHeight },
         // tslint:disable-next-line:object-literal-sort-keys
         editor: {
           edits: [
@@ -116,8 +115,7 @@ export default class Table extends React.Component<ITableProps> {
       blocks.set('title', title, g);
 
       const row: IPosition = {
-        location: { x: 0, y: titleHeight },
-        size: { width: containersize.width, height: rowHeight },
+        location: { left: 0, top: titleHeight, width: containersize.width, height: rowHeight },
         // tslint:disable-next-line:object-literal-sort-keys
         positionChildren: this.positionRowChildren
       }
@@ -128,7 +126,7 @@ export default class Table extends React.Component<ITableProps> {
     return blocks;
   }
 
-  private positionRowChildren = (block: Block, g: IGenerator, index: number, props: Props) => {
+  private positionRowChildren = (block: Block, g: IGenerator, index: number, props: IGenericProps) => {
     // Return a Layout relative to block starting at position at (0, 0)
 
     const rowHeight = this.params.get('rowHeight') as number;
@@ -137,8 +135,7 @@ export default class Table extends React.Component<ITableProps> {
 
     // These children get placed vertically based on index
     const child: IPosition = {
-      location: { x: 0, y: titleHeight + index * rowHeight },
-      size: { width: containersize.width, height: rowHeight }
+      location: { left: 0, top: titleHeight + index * rowHeight, width: containersize.width, height: rowHeight }
     };
 
     // This block is temp and will not be stored in blocks
