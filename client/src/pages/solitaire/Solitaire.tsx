@@ -5,11 +5,11 @@ import {
   DragDrop,
   IEditHelperProps,
   IGenerator,
-  RLGLayout,
+  Layout,
   ServiceOptions
 } from 'react-layout-generator'
 
-import { cardPath } from './Card';
+import { cardPath } from './Card'
 import FoundationStack from './FoundationStack'
 import solitaireGenerator from './solitaireGenerator'
 import Stock from './Stock'
@@ -27,7 +27,6 @@ export interface ISolitaireProps extends IEditHelperProps {
 
 interface ISolitaireState {
   update: number
-
 }
 
 export default class Solitaire extends React.Component<
@@ -60,6 +59,12 @@ export default class Solitaire extends React.Component<
 
   public componentDidMount() {
     this.init()
+    window.addEventListener('resize', this.onWindowResize)
+  }
+
+
+  public componentWillUnmount() {
+    window.removeEventListener('resize', this.onWindowResize)
   }
 
   public update = () => {
@@ -108,22 +113,22 @@ export default class Solitaire extends React.Component<
 
   public render() {
     return (
-      <RLGLayout
-        name='example.Solitaire'
+      <Layout
+        name="example.Solitaire"
         g={this._g}
         service={ServiceOptions.dnd}
         layers={{
           encapsulate: false
         }}
-        debug={[DebugOptions.none]}
+        debug={DebugOptions.none}
         onUpdate={this.update}
       >
         <StockButton
-          key='stock'
+          key="stock"
           data-layout={{
-            name: 'stock'
+            name: 'stock',
+            layer: -1
           }}
-          data-layer={-1}
           data-click={this.onPopulateWaste}
         />
 
@@ -131,15 +136,14 @@ export default class Solitaire extends React.Component<
           name={'waste'}
           key={'waste'}
           data-layout={{
-            name: 'waste'
+            name: 'waste',
+            layer: 1
           }}
-          data-layer={1}
           dragData={this._waste.dragData}
           canDrop={this._waste.canDrop}
           drop={this._waste.drop}
           endDrop={this._waste.endDrop}
           g={this._g}
-         
         >
           {this._waste.cards()}
         </DragDrop>
@@ -149,23 +153,19 @@ export default class Solitaire extends React.Component<
         {this.tableaus()}
 
         <div
-            data-layout={{
-              name: 'New Game',
-              position: {
-                origin: { x: 50, y: 50 },
-                location: { left: '50%', top: '90%', width: 90, height: 24 },
-                // zIndex: 10
-              }
-            }}
-            data-layer={-1}>
-          <button
-            key={'New Game'}
-            onClick={this.newGame}
-          >
+          data-layout={{
+            name: 'New Game',
+
+            origin: { x: .50, y: .50 },
+            location: { left: '50%', top: '90%', width: 90, height: 24 },
+            layer: -1
+          }}
+        >
+          <button key={'New Game'} onClick={this.newGame}>
             New Game
           </button>
         </div>
-      </RLGLayout>
+      </Layout>
     )
   }
 
@@ -182,9 +182,9 @@ export default class Solitaire extends React.Component<
           drop={this._foundation[i].drop}
           endDrop={this._foundation[i].endDrop}
           data-layout={{
-            name
+            name,
+            layer: 1
           }}
-          data-layer={1}
           g={this._g}
         >
           {this._foundation[i].cards()}
@@ -204,14 +204,13 @@ export default class Solitaire extends React.Component<
           name={name}
           key={name}
           dragData={this._tableau[i].dragData}
-          // dragImage ={this._tableau[i].dragImage}
           canDrop={this._tableau[i].canDrop}
           drop={this._tableau[i].drop}
           endDrop={this._tableau[i].endDrop}
           data-layout={{
-            name
+            name,
+            layer: 1
           }}
-          data-layer={1}
           g={this._g}
         >
           {this._tableau[i].cards()}
@@ -232,9 +231,8 @@ export default class Solitaire extends React.Component<
             key={name}
             data-layout={{
               name,
-              position: {
-                location: { left: `${i}%`, top: 0, width: '1%', height: '100%' }
-              }
+
+              location: { left: `${i}%`, top: 0, width: '1%', height: '100%' }
             }}
             style={{ backgroundColor: 'hsl(210,100%,80%)' }}
           />
@@ -244,21 +242,23 @@ export default class Solitaire extends React.Component<
 
     return jsx
   }
+
+  private onWindowResize = () => {
+    this._g.reset()
+  }
+    
 }
 
-export interface IStockButtonProps extends React.HTMLProps<HTMLDivElement> {
-
-}
+export interface IStockButtonProps extends React.HTMLProps<HTMLDivElement> {}
 
 // tslint:disable-next-line:max-classes-per-file
 class StockButton extends React.Component<IStockButtonProps> {
-
   public noop = (event: React.MouseEvent) => {
     event.preventDefault()
     event.stopPropagation()
   }
 
-  public render () {
+  public render() {
     const style = this.props.style
     if (style) {
       // Make image expand to the edge of the button
@@ -266,17 +266,19 @@ class StockButton extends React.Component<IStockButtonProps> {
       style.borderWidth = '0'
     }
 
-    return <button 
-      onClick={this.props['data-click']} 
-      style={style} 
-      onDragStart={this.noop} // Kill built in image
-    >
-      <img
+    return (
+      <button
+        onClick={this.props['data-click']}
+        style={style}
+        onDragStart={this.noop} // Kill built in image
+      >
+        <img
           id={'back'}
           key={'back'}
           src={cardPath('back')}
           style={{ width: '100%', height: '100%' }}
         />
-    </button>
+      </button>
+    )
   }
 }

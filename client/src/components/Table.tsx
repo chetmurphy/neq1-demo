@@ -7,15 +7,15 @@ import {
   DebugOptions,
   Generator,
   ICreate, 
+  IDataLayout,
   IGenerator,
   IGenericProps,
-  IPosition,
-  IRLGMetaDataArgs,
+  IMetaDataArgs,
   ISize,
+  Layout,
+  Panel, 
   Params,
   PositionRef,
-  RLGLayout, 
-  RLGPanel,
   updateParamLocation,
 } from 'react-layout-generator'
 
@@ -61,21 +61,21 @@ export default class Table extends React.Component<ITableProps> {
   public render() {
 
     return (
-      <RLGLayout
+      <Layout
         name={this.props.name}
         debug={DebugOptions.none}
         g={this.g}
         containersize={this.props.containersize}
       >
-        <RLGPanel data-layout={{ name: 'title' }} style={{ backgroundColor: 'black' }} >
-          {(args: IRLGMetaDataArgs) => (
+        <Panel data-layout={{ name: 'title' }} style={{ backgroundColor: 'black' }} >
+          {(args: IMetaDataArgs) => (
               <>
                 <Title>{this.props.name}</Title>
                 {this.createRows()}
               </>
          )}
-        </RLGPanel>
-      </RLGLayout>
+        </Panel>
+      </Layout>
     );
   }
 
@@ -101,7 +101,7 @@ export default class Table extends React.Component<ITableProps> {
 
     if (containersize) {
 
-      const title: IPosition = {
+      const title: IDataLayout = {
         location: { left: 0, top: 0, width: containersize.width, height: titleHeight },
         // tslint:disable-next-line:object-literal-sort-keys
         editor: {
@@ -114,7 +114,7 @@ export default class Table extends React.Component<ITableProps> {
 
       blocks.set('title', title, g);
 
-      const row: IPosition = {
+      const row: IDataLayout = {
         location: { left: 0, top: titleHeight, width: containersize.width, height: rowHeight },
         // tslint:disable-next-line:object-literal-sort-keys
         positionChildren: this.positionRowChildren
@@ -134,7 +134,7 @@ export default class Table extends React.Component<ITableProps> {
     const titleHeight = this.params.get('titleHeight') as number;
 
     // These children get placed vertically based on index
-    const child: IPosition = {
+    const child: IDataLayout = {
       location: { left: 0, top: titleHeight + index * rowHeight, width: containersize.width, height: rowHeight }
     };
 
@@ -144,12 +144,12 @@ export default class Table extends React.Component<ITableProps> {
 
   private create(args: ICreate): Block {
 
-    if (!args.position) {
+    if (!args.dataLayout) {
       // tslint:disable-next-line:no-console
       console.error(`TODO default position ${args.name}`);
     }
 
-    const block = args.g.blocks().set(args.name, args.position, args.g);
+    const block = args.g.blocks().set(args.name, args.dataLayout, args.g);
 
     return block;
   }

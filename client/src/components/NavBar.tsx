@@ -5,11 +5,7 @@ import cssColor from '../assets/colors';
 
 // These paths are for the examples only. In an application you
 // would get these by importing from 'react-layout-generator'
-import {
-  columnsGenerator,
-  DebugOptions,
-  RLGLayout
-} from 'react-layout-generator'
+import { columnsGenerator, DebugOptions, Layout } from 'react-layout-generator';
 
 // tslint:disable-next-line:variable-name
 export const Button = styled.button`
@@ -17,7 +13,7 @@ export const Button = styled.button`
   background: transparent;
   border: none;
   color: ${cssColor.light};
-`
+`;
 
 // tslint:disable-next-line:variable-name
 export const SelectedButton = styled.button`
@@ -25,7 +21,7 @@ export const SelectedButton = styled.button`
   background: ${cssColor.light};
   border: none;
   color: ${cssColor.dark};
-`
+`;
 interface IElement {
   component: any;
   name: string;
@@ -45,7 +41,10 @@ interface INavBarState {
   update: number;
 }
 
-export default class NavBar extends React.Component<INavBarProps, INavBarState> {
+export default class NavBar extends React.Component<
+  INavBarProps,
+  INavBarState
+> {
   private n = columnsGenerator('navbar');
   private elementRefs: IElementRef[] = [];
   private size: Map<string, number> = new Map();
@@ -61,19 +60,21 @@ export default class NavBar extends React.Component<INavBarProps, INavBarState> 
         handler: (event: React.MouseEvent<HTMLButtonElement>) => {
           if (this.state.selected !== e.name) {
             this.setState({ selected: e.name });
-            this.props.callback(e.component)
+            this.props.callback(e.component);
           }
         }
-      })
+      });
     });
 
     this.state = {
       selected: undefined,
       update: 0
-    }
+    };
 
     const item = this.elementRefs.length ? this.elementRefs[0].name : undefined;
-    setTimeout(() => { this.setState({ selected: item }) }, 400);
+    setTimeout(() => {
+      this.setState({ selected: item });
+    }, 400);
   }
 
   public render() {
@@ -81,13 +82,9 @@ export default class NavBar extends React.Component<INavBarProps, INavBarState> 
     this.n.reset();
 
     return (
-      <RLGLayout
-        name='navbar'
-        debug={DebugOptions.none}
-        g={this.n}
-      >
+      <Layout name='navbar' debug={DebugOptions.none} g={this.n}>
         {this.createElements()}
-      </RLGLayout>
+      </Layout>
     );
   }
 
@@ -97,10 +94,12 @@ export default class NavBar extends React.Component<INavBarProps, INavBarState> 
       this.size.set(name, v);
       if (!this.changed) {
         this.changed = 1;
-        setTimeout(() => { this.setState({ update: this.state.update + 1 }) }, 3);
+        setTimeout(() => {
+          this.setState({ update: this.state.update + 1 });
+        }, 3);
       }
     }
-  }
+  };
 
   private createElements = () => {
     return this.elementRefs.map((e: IElementRef) => {
@@ -111,10 +110,14 @@ export default class NavBar extends React.Component<INavBarProps, INavBarState> 
             key={e.name}
             data-layout={{
               name: e.name,
-              position: {
-                location: { left: 0, top: 0, width: width ? width : 100, height: 20 }
+              location: {
+                left: 0,
+                top: 0,
+                width: width ? width : 100,
+                height: 20
               }
-            }}>
+            }}
+          >
             <SelectedButton
               key={e.name}
               data-layout={{ name: e.name }}
@@ -123,30 +126,35 @@ export default class NavBar extends React.Component<INavBarProps, INavBarState> 
               {e.name}
             </SelectedButton>
           </div>
-        )
-      }
-      else {
+        );
+      } else {
         return (
           <div
             key={e.name}
             data-layout={{
               name: e.name,
-              position: {
-                location: { left: 0, top: 0, width: width ? width : 100, height: 20 }
+              location: {
+                left: 0,
+                top: 0,
+                width: width ? width : 100,
+                height: 20
               }
-            }}>
+            }}
+          >
             <Button
               key={e.name}
-              ref={(c) => { if (c) { this.setSize(e.name, c.offsetWidth) } }}
-
+              ref={c => {
+                if (c) {
+                  this.setSize(e.name, c.offsetWidth);
+                }
+              }}
               onClick={e.handler}
             >
               {e.name}
             </Button>
           </div>
-
-        )
+        );
       }
     });
-  }
+  };
 }

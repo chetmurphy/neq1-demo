@@ -7,12 +7,12 @@ import styled from 'styled-components';
 import {
   DebugOptions,
   EditHelper,
+  IDataLayout,
   IEditTool,
   IGenerator,
-  IPosition,
   ISize,
+  Layout,
   Params,
-  RLGLayout,
   rowsGenerator,
   Status, 
 } from 'react-layout-generator'
@@ -81,13 +81,13 @@ export default class ToolBar extends React.Component<IToolBarProps, IToolBarStat
     this.n.reset();
 
     return (
-      <RLGLayout
+      <Layout
         name='ToolBar'
         debug={DebugOptions.none}
         g={this.n}
       >
         {this.createElements()}
-      </RLGLayout>
+      </Layout>
     );
   }
 
@@ -125,10 +125,10 @@ export default class ToolBar extends React.Component<IToolBarProps, IToolBarStat
         }
       } else {
         const name1 = `separator${i}`;
-        const p: IPosition = {
+        const p: IDataLayout = {
           location: { left: 0, top: 0, width: fontSize, height: fontSize / 2 }
         }
-        v = e.component({ key: name1, 'data-layout': { name: name1, position: p }, color: cssColor.lightMiddle, fontSize })
+        v = e.component({ key: name1, 'data-layout': { name: name1, ...p }, color: cssColor.lightMiddle, fontSize })
       }
       return v;
     });
