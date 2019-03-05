@@ -1,5 +1,5 @@
-import { IGenerator } from 'react-layout-generator';
-import Deck from '../../algos/Deck';
+import { IGenerator } from 'react-layout-generator'
+import Deck from '../../algos/Deck'
 import Card, { Face, gCards } from './Card'
 import Stack from './Stack';
 

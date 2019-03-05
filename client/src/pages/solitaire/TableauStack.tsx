@@ -1,11 +1,14 @@
-import { IGenerator } from 'react-layout-generator'
-import { Face, gCards } from './Card';
+import * as React from 'react'
+
+import { IGenerator, IPoint, ISize } from 'react-layout-generator'
+import { cardPath, Face, gCards } from './Card'
 import Stack, { isRedSuite } from './Stack'
 import Stock from './Stock'
 
 export default class TableauStack {
-  private _stack: Stack 
+  private _stack: Stack
   private _name: string
+  private _g: IGenerator
 
   constructor(name: string, update: () => void, g: IGenerator) {
     this._stack = new Stack(true, true, update, g)
@@ -13,6 +16,7 @@ export default class TableauStack {
     this.canDrop = this.canDrop.bind(this)
     this.drop = this.drop.bind(this)
     this.endDrop = this.endDrop.bind(this)
+    this._g = g
   }
 
   public clear() {
@@ -43,10 +47,43 @@ export default class TableauStack {
   }
 
   public dragImage = (ids: string[]) => {
-    return this._stack.dragImage(ids)
+    ids.forEach(id => {
+      console.log(`     Tableau dragImage ${id}`)
+    })
+
+    const cardSize = this._g.params().get('cardSize') as ISize
+    const computedCardSpacing = this._g.params().get('computedCardSpacing') as IPoint;
+
+    const jsx = ids.map((id, i) => {
+
+      const style: React.CSSProperties = {
+        position: "absolute",
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        msUserSelect: 'none',
+        MozUserSelect: 'none',
+        width: cardSize.width,
+        height: cardSize.height,   
+        transform: `translate(0px, ${ i * computedCardSpacing.y}px)`,
+        // pointerEvents: 'none'
+      }
+
+      return (
+        <img
+          id={id}
+          key={id}
+          // onDragStart={this._stack.noop} // Kill built in image
+          src={cardPath(id)}
+          style={style}
+        />
+      )
+    })
+
+    // Create position context
+    return <div style={{position: "absolute"}}>{jsx}</div>
   }
 
-  public canDrop (data: string[]) {
+  public canDrop(data: string[]) {
     let result = false
     const first = gCards.get(data[0])
     if (first) {
@@ -55,19 +92,20 @@ export default class TableauStack {
       } else {
         const last = this._stack.last
         if (last) {
-          result = last.rank - first.rank === 1 &&
+          result =
+            last.rank - first.rank === 1 &&
             isRedSuite(last.suite) !== isRedSuite(first.suite)
           // console.log(`can drop tableau ${this._name} ${first.name} on ${last.name}`, result);
         }
       }
     }
-    
+
     return result
   }
 
-  public drop (data: string[]) {
+  public drop(data: string[]) {
     // console.log(`tableau drop ${this._name} ${data[0]} on ${this._stack.last ? this._stack.last.name : 'undefined'} `)
-    data.forEach((name) => {
+    data.forEach(name => {
       const card = gCards.get(name)
       if (card) {
         this._stack.push(card)
@@ -76,10 +114,10 @@ export default class TableauStack {
     return true
   }
 
-  public endDrop (data: string[]) {
+  public endDrop(data: string[]) {
     console.log(`tableau endDrop ${this._name} ${this._stack.cards.name} `)
-    data.forEach((name) => {
-        this._stack.pop()
+    data.forEach(name => {
+      this._stack.pop()
     })
     // Turn up top card
     const last = this._stack.last

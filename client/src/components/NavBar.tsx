@@ -23,8 +23,9 @@ export const SelectedButton = styled.button`
   color: ${cssColor.dark};
 `;
 interface IElement {
-  component: any;
-  name: string;
+  component: any
+  markdown: string
+  name: string
 }
 
 interface IElementRef extends IElement {
@@ -33,7 +34,7 @@ interface IElementRef extends IElement {
 
 interface INavBarProps {
   elements: IElement[];
-  callback: (component: any) => void;
+  callback: (component: any, markdown: string) => void;
 }
 
 interface INavBarState {
@@ -56,11 +57,12 @@ export default class NavBar extends React.Component<
     this.props.elements.forEach((e: IElement) => {
       this.elementRefs.push({
         component: e.component,
+        markdown: e.markdown,
         name: e.name,
         handler: (event: React.MouseEvent<HTMLButtonElement>) => {
           if (this.state.selected !== e.name) {
             this.setState({ selected: e.name });
-            this.props.callback(e.component);
+            this.props.callback(e.component, e.markdown);
           }
         }
       });
@@ -72,8 +74,10 @@ export default class NavBar extends React.Component<
     };
 
     const item = this.elementRefs.length ? this.elementRefs[0].name : undefined;
+    const markdown = this.elementRefs.length ? this.elementRefs[0].markdown : '';
     setTimeout(() => {
       this.setState({ selected: item });
+      this.props.callback(item, markdown);
     }, 400);
   }
 

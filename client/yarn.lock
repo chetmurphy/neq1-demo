@@ -1501,6 +1501,14 @@ babel-plugin-macros@2.4.2:
     cosmiconfig "^5.0.5"
     resolve "^1.8.1"
 
+babel-plugin-macros@^2.1.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-macros/-/babel-plugin-macros-2.5.0.tgz#01f4d3b50ed567a67b80a30b9da066e94f4097b6"
+  integrity sha512-BWw0lD0kVZAXRD3Od1kMrdmfudqzDzYv2qrN3l2ISR1HVp1EgLKfbOrYV9xmY5k3qx3RIu5uPAUZZZHpo0o5Iw==
+  dependencies:
+    cosmiconfig "^5.0.5"
+    resolve "^1.8.1"
+
 babel-plugin-named-asset-import@^0.2.0:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-0.2.3.tgz#b40ed50a848e7bb0a2a7e34d990d1f9d46fe9b38"
@@ -7401,6 +7409,21 @@ raw-body@2.3.3:
     iconv-lite "0.4.23"
     unpipe "1.0.0"
 
+raw-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-1.0.0.tgz#3f9889e73dadbda9a424bce79809b4133ad46405"
+  integrity sha512-Uqy5AqELpytJTRxYT4fhltcKPj0TyaEpzJDcGz7DFJi+pQOOi3GjR/DOdxTkTsF+NzhnldIoG6TORaBlInUuqA==
+  dependencies:
+    loader-utils "^1.1.0"
+    schema-utils "^1.0.0"
+
+raw.macro@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/raw.macro/-/raw.macro-0.3.0.tgz#b62391c5c7a77fd5673b688ac031ba0c5cbff1dc"
+  integrity sha512-VGX8RNUyZ7cZDa4dM8tvysaqryMSQRPbZqmTKKIur2uaGbpmG9Jj9CAY3ndpO8J3RMu0zf2K0JvIwbYMS29TOQ==
+  dependencies:
+    babel-plugin-macros "^2.1.0"
+
 rc@^1.2.7:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.8.tgz#cd924bf5200a075b83c188cd6b9e211b7fc0d3ed"
@@ -7471,10 +7494,10 @@ react-is@^16.6.0:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
 
-react-layout-generator@^0.5.9-alpha.2:
-  version "0.5.9-alpha.2"
-  resolved "https://registry.yarnpkg.com/react-layout-generator/-/react-layout-generator-0.5.9-alpha.2.tgz#d472fc38dbe2ef3a1228b999eac5ee3c67007870"
-  integrity sha512-0bEPi1eSduAHhMZRFiA040bNQMROPKU6iB4f73NYpIiwrbUECDPqFhXyenxbnpJ0igpqpTWEzeo9GnjkfiTZLQ==
+react-layout-generator@^0.5.10-alpha.2:
+  version "0.5.10-alpha.2"
+  resolved "https://registry.yarnpkg.com/react-layout-generator/-/react-layout-generator-0.5.10-alpha.2.tgz#0b497477157b759b076aa3cf630bd21b5a8a026d"
+  integrity sha512-o9qn+1CtGZQdeV7sFovm2hi2NlrLvQGbbtYl/QDC2OvpTNHKKgf/u8qJDuxbMNeHMHnRtYdmU1DV35neAU63AQ==
   dependencies:
     colors "^1.3.2"
     deep-equal "^1.0.1"

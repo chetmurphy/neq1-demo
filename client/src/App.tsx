@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import ReactMarkdown  from 'react-markdown'
 // import { Params } from 'router5/types/types/base'
 // import routerStore from './stores/RouterStore';
 
@@ -31,8 +32,8 @@ import ToolBar from './components/ToolBar';
 // import DeskTop from './desktop/DeskTop';
 // import Editable from './editable/Editable';
 // import Grid from './grid/Grid';
-import Intro from './pages/intro/Intro';
-import Solitaire from './pages/solitaire/Solitaire';
+import Intro, {introMarkdown} from './pages/intro/Intro';
+import Solitaire, {solitaireMarkdown} from './pages/solitaire/Solitaire';
 
 // Icons
 import {
@@ -80,7 +81,8 @@ export const Button = styled.button`
 // tslint:disable-next-line:max-classes-per-file
 export default class App extends React.Component<{}, { 
   app: JSX.Element,
-  info: boolean}> {
+  info: boolean,
+  markdown: string}> {
   public g: IGenerator;
   public n: IGenerator;
 
@@ -107,12 +109,12 @@ export default class App extends React.Component<{}, {
     this.n = columnsGenerator('navbar');
 
     this.editHelper = new EditHelper();
-    this.state = { app: <Intro editHelper={this.getEditHelper} />, info: false };
+    this.state = { app: <Intro editHelper={this.getEditHelper} />, info: false, markdown: '' };
   }
 
-  public select = (element: JSX.Element) => {
+  public select = (element: JSX.Element, markdown: string) => {
     this.editHelper.clear();
-    this.setState({ app: element });
+    this.setState({ app: element, markdown });
   };
 
   // public link = (name: string, routeParams: Params) => {
@@ -172,12 +174,14 @@ export default class App extends React.Component<{}, {
                 // if props change then the props should be functions that return the correct value
                 {
                   component: <Intro editHelper={this.getEditHelper} />,
+                  markdown: introMarkdown,
                   name: 'Home'
                 },
                 // { component: <DeskTop editHelper={this.getEditHelper} />, name: 'DeskTop' },
                 // { component: <CardDeck editHelper={this.getEditHelper} />, name: 'CardDeck' },
                 {
                   component: <Solitaire editHelper={this.getEditHelper} />,
+                  markdown: solitaireMarkdown,
                   name: 'Drag/Drop'
                 }
                 // { component: <Solitaire2 editHelper={this.getEditHelper} />, name: 'Solitaire2' },
@@ -214,9 +218,9 @@ export default class App extends React.Component<{}, {
 
           <div
             data-layout={{ name: 'rightSide' }}
-            style={{ backgroundColor: 'LightYellow' }}
+            style={{ backgroundColor: 'LightYellow', padding: 5, overflowX: "hidden",  overflowY: "scroll"}}
           >
-            <span>hello</span>
+            <ReactMarkdown source={this.state.markdown} />
           </div>
 
           <div data-layout={{ name: 'content' }}>{this.state.app}</div>

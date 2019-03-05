@@ -1,21 +1,10 @@
 import * as React from 'react'
 
 import { Draggable, IGenerator } from 'react-layout-generator'
-import Card, { cardPath, Face } from './Card'
-
-// export type ICanDrop = (
-//   cards: Card,
-//   topCard: Card | undefined
-// ) => boolean | undefined
+import Card, { Face } from './Card'
 
 export default class Stack {
-  // protected _canDrop: ICanDrop | undefined
   private _stack: Card[] = []
-  // private _update: () => void
-  // private _drag: boolean
-  // private _drop: boolean
-  
-  // private _allowDragAndDrop: boolean = true
   private _g: IGenerator
 
   constructor(
@@ -23,12 +12,7 @@ export default class Stack {
     drop: boolean,
     update: () => void,
     g: IGenerator,
-    // allowDrop?: ICanDrop,
   ) {
-    // this._drag = drag
-    // this._drop = drop
-    // this._update = update
-    // this._canDrop = allowDrop
     this._g = g
   }
 
@@ -86,46 +70,15 @@ export default class Stack {
       }
       
     }
+
+    ids.forEach(item=> {
+      console.log(`     Tableau dragData ${item}`)
+    })
     return ids
   }
 
 
-  public dragImage(ids: string[]) {
-
-    const style: React.CSSProperties = {
-      userSelect: 'none',
-      WebkitUserSelect: 'none',
-      msUserSelect: 'none',
-      MozUserSelect: 'none',
-      // pointerEvents: 'none'
-    }
-
-    const jsx = ids.forEach((id) => {
-      return (
-        <Draggable
-        id={id}
-        key={id}
-        name={id}
-        g={this._g}
-      >
-        <img
-          id={id}
-          key={id}
-          onDragStart={this.noop} // Kill built in image
-          src={cardPath(id)}
-          style={style}
-        />
-      </Draggable>
-      )
-    })
-
-    return (
-      <>
-      {jsx}
-      </>
-    )
-  }
-
+  
   public cards () {
     const style: React.CSSProperties = {
       userSelect: 'none',
