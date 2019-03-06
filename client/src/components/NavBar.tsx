@@ -24,7 +24,7 @@ export const SelectedButton = styled.button`
 `;
 interface IElement {
   component: any
-  markdown: string
+  markdown: () => string
   name: string
 }
 
@@ -34,7 +34,7 @@ interface IElementRef extends IElement {
 
 interface INavBarProps {
   elements: IElement[];
-  callback: (component: any, markdown: string) => void;
+  callback: (component: any, markdown:  () => string) => void;
 }
 
 interface INavBarState {
@@ -73,12 +73,12 @@ export default class NavBar extends React.Component<
       update: 0
     };
 
-    const item = this.elementRefs.length ? this.elementRefs[0].name : undefined;
-    const markdown = this.elementRefs.length ? this.elementRefs[0].markdown : '';
-    setTimeout(() => {
-      this.setState({ selected: item });
-      this.props.callback(item, markdown);
-    }, 400);
+    // const item = this.elementRefs.length ? this.elementRefs[0].name : undefined;
+    // const markdown = this.elementRefs.length ? this.elementRefs[0].markdown : '';
+    // setTimeout(() => {
+    //   this.setState({ selected: item });
+    //   this.props.callback(item, markdown);
+    // }, 400);
   }
 
   public render() {

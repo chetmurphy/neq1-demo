@@ -1,5 +1,5 @@
-import * as React from 'react'
-import styled from 'styled-components'
+import * as React from "react";
+import styled from "styled-components";
 
 import {
   Block,
@@ -12,10 +12,14 @@ import {
   Queue,
   ServiceOptions,
   Status
-} from 'react-layout-generator'
+} from "react-layout-generator";
 
-// const Title = styled.h2`
-// `
+// tslint:disable-next-line:no-var-requires
+const introMarkdownFile = require("./description.md");
+let gIntroMarkdown: string = ''
+export function introMarkdown() {
+  return gIntroMarkdown
+}
 
 // tslint:disable-next-line:variable-name
 const Description = styled.div`
@@ -24,188 +28,133 @@ const Description = styled.div`
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.25rem;
-`
+`;
 
-export const introMarkdown: string = `
-### Home Implementation
-
-This site is built using React Layout Generator (RLG). Each page uses the same desktop generator with custom content. 
-
-Home is an example of path animation. In this implementation there are one to four vertical paths depending upon the available
-space. 
-
-A path animation is implemented as a hook that can be used with any generator. 
-
-\`\`\`ts
-  <Layout
-    name={'Layout.intro.example'}
-    service={this._edit ? ServiceOptions.edit : ServiceOptions.none}
-    debug={DebugOptions.none}
-    animate={{ active: true }}
-    g={this._g}
-    overflowX={OverflowOptions.hidden}
-    overflowY={OverflowOptions.hidden}
-  >
-    {this.content()}
-  </Layout>
-\`\`\`
-
-Where the contents is a list of div containing the features:
-
-\`\`\`ts
-  <div
-    key={name}
-    data-layout={{
-      name,
-      origin: { x: 0.5, y: 0.5 },
-      location: { left: 0, top: 0, width: 250, height: '100u' },
-      layer: 1
-    }}
-  >
-    <Description>{feature}</Description>
-  </div>
-\`\`\`
-
-And the pathHook is defined as:
-
-\`\`\`ts
-  pathHook({
-    prefix: 'Paths #A',
-    points: [
-      {
-        min: 0, max: 480, points: [
-          {x: '50%', y: 0}, {x: '50%',y: '100%'},
-        ],
-      },
-      {
-        min: 480, max: 720, points: [
-          {x: '30%', y: 0}, {x: '30%',y: '100%'},
-          {x: '60%', y: 0}, {x: '60%',y: '100%'},
-        ],
-      },
-      {
-        min: 720, max: 1024, points: [
-          {x: '25%', y: 0}, {x: '25%',y: '100%'},
-          {x: '50%', y: 0}, {x: '50%',y: '100%'},
-          {x: '75%', y: 0}, {x: '75%',y: '100%'},
-        ],
-      },
-      {
-        min: 1024, max: 2560, points: [
-          {x: '20%', y: 0}, {x: '20%',y: '100%'},
-          {x: '40%', y: 0}, {x: '40%',y: '100%'},
-          {x: '60%', y: 0}, {x: '60%',y: '100%'},
-          {x: '80%', y: 0}, {x: '80%',y: '100%'},
-        ],
-      },
-
-    ],
-    input: () => blocks.layers(1),
-    update: this._flow,
-    output: this._flow,
-    velocity: .05,
-    spacing: 200,
-    fill: true,
-    g: this._g
-  })
-\`\`\`
-`
+interface IIntroProps extends IEditHelperProps {
+  onUpdate?: () => void
+}
 
 interface IIntroState {
-  update: number
+  update: number;
 }
 
 export default class Intro extends React.Component<
-  IEditHelperProps,
+  IIntroProps,
   IIntroState
 > {
-  private _g = dynamicGenerator('rlg.intro')
-  private _edit: boolean = false
-  private _flow: Queue<Block> = new Queue<Block>('flow')
+  private _g = dynamicGenerator("rlg.intro");
+  private _edit: boolean = false;
+  private _flow: Queue<Block> = new Queue<Block>("flow");
 
   constructor(props: IEditHelperProps) {
-    super(props)
+    super(props);
 
-    this.state = { update: 0 }
+    this.state = { update: 0 };
   }
 
   public componentDidMount() {
     // console.log('EditHelpers load Intro');
+
+    fetch(introMarkdownFile)
+      .then(response => response.text())
+      .then(text => {
+        // Logs a string of Markdown content.
+        // Now you could use e.g. <rexxars/react-markdown> to render it.
+        gIntroMarkdown = text;
+        if (this.props.onUpdate) {
+          this.props.onUpdate()
+        }
+      });
+
     this.props.editHelper().load([
       {
-        name: 'edit',
+        name: "edit",
         command: this.setEdit,
         status: this._edit ? Status.up : Status.down
       }
-    ])
+    ]);
 
-    const hooks = this._g.hooks()
-    const blocks = this._g.blocks()
+    const hooks = this._g.hooks();
+    const blocks = this._g.blocks();
 
     hooks.set(
-      'Paths #A',
+      "Paths #A",
       pathHook({
-        prefix: 'Paths #A',
+        prefix: "Paths #A",
         points: [
           {
-            min: 0, max: 480, points: [
-              {x: '50%', y: 0}, {x: '50%',y: '100%'},
-            ],
+            min: 0,
+            max: 480,
+            points: [{ x: "50%", y: 0 }, { x: "50%", y: "100%" }]
           },
           {
-            min: 480, max: 720, points: [
-              {x: '30%', y: 0}, {x: '30%',y: '100%'},
-              {x: '60%', y: 0}, {x: '60%',y: '100%'},
-            ],
+            min: 480,
+            max: 720,
+            points: [
+              { x: "30%", y: 0 },
+              { x: "30%", y: "100%" },
+              { x: "60%", y: 0 },
+              { x: "60%", y: "100%" }
+            ]
           },
           {
-            min: 720, max: 1024, points: [
-              {x: '25%', y: 0}, {x: '25%',y: '100%'},
-              {x: '50%', y: 0}, {x: '50%',y: '100%'},
-              {x: '75%', y: 0}, {x: '75%',y: '100%'},
-            ],
+            min: 720,
+            max: 1024,
+            points: [
+              { x: "25%", y: 0 },
+              { x: "25%", y: "100%" },
+              { x: "50%", y: 0 },
+              { x: "50%", y: "100%" },
+              { x: "75%", y: 0 },
+              { x: "75%", y: "100%" }
+            ]
           },
           {
-            min: 1024, max: 2560, points: [
-              {x: '20%', y: 0}, {x: '20%',y: '100%'},
-              {x: '40%', y: 0}, {x: '40%',y: '100%'},
-              {x: '60%', y: 0}, {x: '60%',y: '100%'},
-              {x: '80%', y: 0}, {x: '80%',y: '100%'},
-            ],
-          },
-
+            min: 1024,
+            max: 2560,
+            points: [
+              { x: "20%", y: 0 },
+              { x: "20%", y: "100%" },
+              { x: "40%", y: 0 },
+              { x: "40%", y: "100%" },
+              { x: "60%", y: 0 },
+              { x: "60%", y: "100%" },
+              { x: "80%", y: 0 },
+              { x: "80%", y: "100%" }
+            ]
+          }
         ],
         input: () => blocks.layers(1),
         update: this._flow,
         output: this._flow,
-        velocity: .05,
+        velocity: 0.05,
         spacing: 200,
         fill: true,
         g: this._g
       })
-    )
+    );
   }
 
   public setEdit = (status: Status) => {
     if (status === Status.down) {
-      status = Status.up
-      this._edit = true
+      status = Status.up;
+      this._edit = true;
     } else {
-      status = Status.down
-      this._edit = false
+      status = Status.down;
+      this._edit = false;
     }
 
     // this.grid(this._gridUnit)
     // this._g.clear();
-    this.setState({ update: this.state.update + 1 })
+    this.setState({ update: this.state.update + 1 });
 
-    return status
-  }
+    return status;
+  };
 
   public render() {
     return (
       <Layout
-        name={'Layout.intro.example'}
+        name={"Layout.intro.example"}
         service={this._edit ? ServiceOptions.edit : ServiceOptions.none}
         debug={DebugOptions.none}
         animate={{ active: true }}
@@ -215,11 +164,11 @@ export default class Intro extends React.Component<
       >
         {this.content()}
       </Layout>
-    )
+    );
   }
 
   public content = () => {
-    let index = 1000
+    let index = 1000;
     const features: any[] = [
       <div key={`${++index}`}>Template Support.</div>,
       <div key={`${++index}`}>Dashboard</div>,
@@ -256,31 +205,31 @@ export default class Intro extends React.Component<
       <div key={`${++index}`}>Physics Engine Capable</div>,
       <div key={`${++index}`}>Debug Options</div>,
       <div key={`${++index}`}>Overlays</div>
-    ]
-    const jsx: JSX.Element[] = []
-    let i = 0
+    ];
+    const jsx: JSX.Element[] = [];
+    let i = 0;
     for (i = 0; i < features.length; i++) {
-      const feature = features[i]
-      const name = `${i++}`
+      const feature = features[i];
+      const name = `${i++}`;
       jsx.push(
         <div
           key={name}
           data-layout={{
             name,
             origin: { x: 0.5, y: 0.5 },
-            location: { left: 0, top: 0, width: 250, height: '100u' },
+            location: { left: 0, top: 0, width: 250, height: "100u" },
             layer: 1
           }}
         >
           <Description>{feature}</Description>
         </div>
-      )
+      );
     }
 
-    return jsx
-  }
+    return jsx;
+  };
 }
 
 export const introJSX = (props: IEditHelperProps): JSX.Element => {
-  return <Intro {...props} />
-}
+  return <Intro {...props} />;
+};

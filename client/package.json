@@ -11,7 +11,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-icons": "^3.3.0",
-    "react-layout-generator": "^0.5.10-alpha.2",
+    "react-layout-generator": "^0.5.11-alpha.2",
     "react-markdown": "^4.0.6",
     "react-scripts-ts": "^4.0.8",
     "router5": "^7.0.1",

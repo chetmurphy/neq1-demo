@@ -1,14 +1,10 @@
 ### Home Implementation
 
-This site is built using React Layout Generator (RLG). Each page uses the same desktop generator with custom content. 
-
-Home is an example of path animation. In this implementation there are one to four vertical lines depending upon the available
-space. A path animation works by moving each block along the path. At the end of the path the blocks can be discarded or as in
-this example put back at the beginning.
+This page is an example of a path animation. In this implementation there are one to four vertical line segments depending upon the available space. A path animation works by moving each block along the path. At the end of the path the blocks can be discarded or as in this example put back at the beginning.
 
 A path animation is implemented as a hook that can be used with any generator. 
 
-\`\`\`ts
+```ts
   <Layout
     name={'Layout.intro.example'}
     service={this._edit ? ServiceOptions.edit : ServiceOptions.none}
@@ -20,11 +16,11 @@ A path animation is implemented as a hook that can be used with any generator.
   >
     {this.content()}
   </Layout>
-\`\`\`
+```
 
 Where the contents is a list of div's containing the features:
 
-\`\`\`ts
+```ts
   <div
     key={name}
     data-layout={{
@@ -36,11 +32,11 @@ Where the contents is a list of div's containing the features:
   >
     <Description>{feature}</Description>
   </div>
-\`\`\`
+```
 
 And the pathHook is defined as:
 
-\`\`\`ts
+```ts
   pathHook({
     prefix: 'Paths #A',
     points: [
@@ -80,4 +76,4 @@ And the pathHook is defined as:
     fill: true,
     g: this._g
   })
-\`\`\`
+```
