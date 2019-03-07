@@ -12,7 +12,6 @@ The Stock is inactive except for an onClick handler to draw the next three cards
     layers={{
       encapsulate: false
     }}
-    debug={DebugOptions.none}
     onUpdate={this.update}
   >
     <StockButton

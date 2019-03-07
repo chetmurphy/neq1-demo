@@ -5,7 +5,6 @@ import styled from 'styled-components';
 // would get these by importing from 'react-layout-generator'
 
 import {
-  DebugOptions,
   EditHelper,
   IDataLayout,
   IEditTool,
@@ -83,7 +82,6 @@ export default class ToolBar extends React.Component<IToolBarProps, IToolBarStat
     return (
       <Layout
         name='ToolBar'
-        debug={DebugOptions.none}
         g={this.n}
       >
         {this.createElements()}

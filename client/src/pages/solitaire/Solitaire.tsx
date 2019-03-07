@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import {
-  DebugOptions,
   DragDrop,
   IEditHelperProps,
   IGenerator,
@@ -141,7 +140,6 @@ export default class Solitaire extends React.Component<
         layers={{
           encapsulate: false
         }}
-        debug={DebugOptions.none}
         onUpdate={this.update}
       >
         <StockButton

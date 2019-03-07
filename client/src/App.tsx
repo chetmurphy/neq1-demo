@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import * as Sentry from '@sentry/browser';
+
 import ReactMarkdown from "react-markdown";
 // import { Params } from 'router5/types/types/base'
 // import routerStore from './stores/RouterStore';
@@ -11,7 +13,6 @@ import "highlight.js/styles/vs.css";
 
 import {
   columnsGenerator,
-  DebugOptions,
   desktopGenerator,
   EditHelper,
   IGenerator,
@@ -78,6 +79,11 @@ export const Button = styled.button`
   color: ${cssColor.light};
 `;
 
+Sentry.init({
+  release: "react-layout-generator@0.5.11",
+  dsn: "https://990e004f6c634ea2ac0cec00daa87f3b@sentry.io/1409701"
+});
+
 // tslint:disable-next-line:max-classes-per-file
 export default class App extends React.Component<
   {},
@@ -131,6 +137,8 @@ export default class App extends React.Component<
 
   public componentDidMount() {
     window.addEventListener("resize", this.resize);
+
+
   }
 
   public componentWillUnmount() {
@@ -156,7 +164,6 @@ export default class App extends React.Component<
       <ErrorBoundary>
         <Layout
           name="framework"
-          debug={DebugOptions.data}
           service={ServiceOptions.none}
           g={this.g}
           overflowX={OverflowOptions.hidden}
@@ -337,7 +344,6 @@ export default class App extends React.Component<
     return (
       <Layout
         name={"Layout.intro.example.overlay"}
-        debug={DebugOptions.none}
         g={this.g}
         overflowX={OverflowOptions.hidden}
         overflowY={OverflowOptions.hidden}

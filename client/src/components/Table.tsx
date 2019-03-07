@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import {
   Block,
   Blocks, 
-  DebugOptions,
   Generator,
   ICreate, 
   IDataLayout,
@@ -63,7 +62,6 @@ export default class Table extends React.Component<ITableProps> {
     return (
       <Layout
         name={this.props.name}
-        debug={DebugOptions.none}
         g={this.g}
         containersize={this.props.containersize}
       >

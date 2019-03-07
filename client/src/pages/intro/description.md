@@ -8,7 +8,6 @@ A path animation is implemented as a hook that can be used with any generator.
   <Layout
     name={'Layout.intro.example'}
     service={this._edit ? ServiceOptions.edit : ServiceOptions.none}
-    debug={DebugOptions.none}
     animate={{ active: true }}
     g={this._g}
     overflowX={OverflowOptions.hidden}

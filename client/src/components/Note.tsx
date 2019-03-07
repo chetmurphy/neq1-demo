@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import {
   Block,
-  DebugOptions,
   IGenerator,
   IPoint,
   IRect
@@ -24,7 +23,6 @@ interface INoteProps {
   container?: IRect;
   block?: Block;
   edit?: boolean;
-  debug?: DebugOptions;
   g?: IGenerator;
   context?: Map<string, any>;
   update?: () => void;

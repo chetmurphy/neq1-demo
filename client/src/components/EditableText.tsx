@@ -3,7 +3,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import {
-  DebugOptions,
   IEditableTextData,
   IOrigin,
   ISize,
@@ -38,7 +37,6 @@ export const NotEditable = styled.div<IProps>`
 interface IEditableTextProps extends React.Props<HTMLDivElement> {
   params: Params;
   edit: boolean;
-  debug: DebugOptions;
   variable: string;
   containersize: ISize;
 }

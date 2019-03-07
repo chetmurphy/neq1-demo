@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import {
   Block,
-  DebugOptions,
   dynamicGenerator,
   IEditHelperProps,
   Layout,
@@ -156,7 +155,6 @@ export default class Intro extends React.Component<
       <Layout
         name={"Layout.intro.example"}
         service={this._edit ? ServiceOptions.edit : ServiceOptions.none}
-        debug={DebugOptions.none}
         animate={{ active: true }}
         g={this._g}
         overflowX={OverflowOptions.hidden}
