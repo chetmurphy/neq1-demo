@@ -68,7 +68,6 @@ export default class Waste {
   }
 
   public endDrop = (data: string[]) => {
-    // console.log(`foundation endDrop ${this._waste.cards.name} `)
     // Remove last card
     this._waste.pop()
   }

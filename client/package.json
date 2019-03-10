@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.6.0-alpha.3",
+  "version": "0.6.9-alpha.3",
   "private": true,
   "dependencies": {
     "@sentry/browser": "^4.6.4",
@@ -9,10 +9,10 @@
     "pouchdb-browser": "^7.0.0",
     "raw-loader": "^1.0.0",
     "raw.macro": "^0.3.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "react-icons": "^3.3.0",
-    "react-layout-generator": "^0.6.0-alpha.3",
+    "react-layout-generator": "^0.6.9-alpha.3",
     "react-markdown": "^4.0.6",
     "react-scripts-ts": "^4.0.8",
     "router5": "^7.0.1",

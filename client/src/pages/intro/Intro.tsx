@@ -52,7 +52,6 @@ export default class Intro extends React.Component<
   }
 
   public componentDidMount() {
-    // console.log('EditHelpers load Intro');
 
     fetch(introMarkdownFile)
       .then(response => response.text())

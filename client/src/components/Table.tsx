@@ -49,7 +49,6 @@ export default class Table extends React.Component<ITableProps> {
     this.params = new Params({
       // tslint:disable-next-line:object-literal-sort-keys
       name: 'props.name', initialValues: [
-        ['containersize', { width: 0, height: 0 }],
         ['titleHeight', 36],
         ['rowHeight', 24]
       ]
@@ -83,14 +82,14 @@ export default class Table extends React.Component<ITableProps> {
 
   private init = (g: IGenerator): Blocks => {
 
-    const containersize = this.params.get('containersize') as ISize;
+    const containersize = g.containersize()
     const titleHeight = this.params.get('titleHeight') as number;
     const rowHeight = this.params.get('rowHeight') as number;
     // const footerHeight = this.params.get('footerHeight') as number;
 
     const blocks = g.blocks();
 
-    if (this.params.changed()) {
+    if (this.params.changed() || g.containerChanged()) {
       // update Layout for each update
       blocks.map.forEach((block) => {
         block.touch();
@@ -108,7 +107,6 @@ export default class Table extends React.Component<ITableProps> {
           ]
         }
       }
-      // console.log('cardSize', cardSize);
 
       blocks.set('title', title, g);
 
@@ -128,7 +126,7 @@ export default class Table extends React.Component<ITableProps> {
     // Return a Layout relative to block starting at position at (0, 0)
 
     const rowHeight = this.params.get('rowHeight') as number;
-    const containersize = this.params.get('containersize') as ISize;
+    const containersize = g.containersize()
     const titleHeight = this.params.get('titleHeight') as number;
 
     // These children get placed vertically based on index

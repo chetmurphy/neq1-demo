@@ -29,24 +29,15 @@ export default class FoundationStack {
     if (first && data.length === 1) {
       if (this._stack.length === 0) {
         result = first.rank === 1
-        // console.log(`can drop foundation ${this._name} ${first}`, result)
       } else {
         const last = this._stack.last
         if (last) {
           result =
             last.rank - first.rank === -1 &&
             isRedSuite(last.suite) === isRedSuite(first.suite)
-          // console.log(
-          //  `can drop foundation ${this._name} ${first.name} on ${last.name}`,
-          ///  result
-          // )
         }
       }
     }
-    // console.log(
-    //   `can drop foundation final ${top ? top.name : undefined}`,
-    //   result
-    // )
     return result
   }
 

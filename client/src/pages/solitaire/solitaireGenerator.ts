@@ -16,7 +16,6 @@ import {
 export default function solitaireGenerator(gArgs: IGeneratorFunctionArgs) {
 
   const values: Array<[string, ParamValue]> = [
-    ['containersize', { width: 0, height: 0 }],
     ['gameMargin', 20],
     ['cardSizeRatio', 1.3],
     ['cardSpacingRatio', { x: .18, y: .17 }],
@@ -29,7 +28,7 @@ export default function solitaireGenerator(gArgs: IGeneratorFunctionArgs) {
 
     const params = g.params();
 
-    const containersize = params.get('containersize') as ISize;
+    const containersize = g.containersize()
     const gameMargin = params.get('gameMargin') as number;
     const cardSizeRatio = params.get('cardSizeRatio') as number;
     const cardSpacingRatio = params.get('cardSpacingRatio') as IPoint;

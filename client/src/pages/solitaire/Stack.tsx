@@ -90,7 +90,6 @@ export default class Stack {
   
     if (this._stack.length) {
       return this._stack.map((card, i) => {
-        // console.log(`this._stack.map ${card.name}`)
         if (card.face === Face.up) {
           return (
             <Draggable

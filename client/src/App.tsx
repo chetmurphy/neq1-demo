@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import * as Sentry from '@sentry/browser';
+import * as Sentry from "@sentry/browser";
 
 import ReactMarkdown from "react-markdown";
 // import { Params } from 'router5/types/types/base'
@@ -12,7 +12,6 @@ import styled from "styled-components";
 import "highlight.js/styles/vs.css";
 
 import {
-  columnsGenerator,
   desktopGenerator,
   EditHelper,
   IGenerator,
@@ -30,6 +29,7 @@ import cssColor from "./assets/colors";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NavBar from "./components/NavBar";
 import ToolBar from "./components/ToolBar";
+import Diagram, { diagramMarkdown } from "./pages/diagram/Diagram";
 // import DeskTop from './desktop/DeskTop';
 // import Editable from './editable/Editable';
 // import Grid from './grid/Grid';
@@ -88,19 +88,16 @@ Sentry.init({
 export default class App extends React.Component<
   {},
   {
-    app: JSX.Element
-    info: boolean
-    markdown: () => string
-    markdownView: boolean
-    update: number
+    app: JSX.Element;
+    info: boolean;
+    markdown: () => string;
+    markdownView: boolean;
+    update: number;
   }
 > {
   public g: IGenerator;
-  public n: IGenerator;
 
   private editHelper: EditHelper;
-
-  // private _editHelper: EditHelper;
 
   constructor(props: any) {
     super(props);
@@ -118,7 +115,7 @@ export default class App extends React.Component<
     // Show full width header and footer
     p.set("fullWidthHeaders", 1);
 
-    this.n = columnsGenerator("navbar");
+    // this.n = columnsGenerator("navbar");
 
     this.editHelper = new EditHelper();
     this.state = {
@@ -133,16 +130,14 @@ export default class App extends React.Component<
   // tslint:disable-next-line:member-ordering
   public resize = () => {
     this.updateInfo(true);
-  }
+  };
 
   public componentDidMount() {
     window.addEventListener("resize", this.resize);
-
-
   }
 
   public componentWillUnmount() {
-      window.removeEventListener("resize", this.resize);
+    window.removeEventListener("resize", this.resize);
   }
 
   public select = (element: JSX.Element, markdown: () => string) => {
@@ -205,16 +200,36 @@ export default class App extends React.Component<
               elements={[
                 // if props change then the props should be functions that return the correct value
                 {
-                  component: <Intro editHelper={this.getEditHelper} onUpdate={this.onUpdate}/>,
+                  component: (
+                    <Intro
+                      editHelper={this.getEditHelper}
+                      onUpdate={this.onUpdate}
+                    />
+                  ),
                   markdown: introMarkdown,
                   name: "Home"
                 },
                 // { component: <DeskTop editHelper={this.getEditHelper} />, name: 'DeskTop' },
                 // { component: <CardDeck editHelper={this.getEditHelper} />, name: 'CardDeck' },
                 {
-                  component: <Solitaire editHelper={this.getEditHelper} onUpdate={this.onUpdate}/>,
+                  component: (
+                    <Solitaire
+                      editHelper={this.getEditHelper}
+                      onUpdate={this.onUpdate}
+                    />
+                  ),
                   markdown: solitaireMarkdown,
                   name: "Drag/Drop"
+                },
+                {
+                  component: (
+                    <Diagram
+                      editHelper={this.getEditHelper}
+                      onUpdate={this.onUpdate}
+                    />
+                  ),
+                  markdown: diagramMarkdown,
+                  name: "Diagram"
                 }
                 // { component: <Solitaire2 editHelper={this.getEditHelper} />, name: 'Solitaire2' },
                 // { component: <Grid editHelper={this.getEditHelper} />, name: 'Grid' },
@@ -279,8 +294,8 @@ export default class App extends React.Component<
   }
 
   private onUpdate = () => {
-    this.setState({update: this.state.update + 1})
-  }
+    this.setState({ update: this.state.update + 1 });
+  };
 
   private separator = (props: IconBaseProps & { key: string }) => {
     const fontSize =
@@ -312,27 +327,23 @@ export default class App extends React.Component<
   private onAppInfoClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     event.preventDefault();
-    console.log(`onAppInfoClick`);
     this.updateInfo();
   };
 
   private updateInfo(resize?: boolean) {
     const p = this.g.params();
     if (!this.state.info || resize) {
-      
-      let side = false
+      let side = false;
       if (window.innerHeight < window.innerWidth) {
         p.set("rightSideWidth", 0.3 * window.innerWidth);
         p.set("footerHeight", 0);
-        side = true
-      }
-      else {
+        side = true;
+      } else {
         p.set("footerHeight", 0.3 * window.innerHeight);
         p.set("rightSideWidth", 0);
       }
-      this.setState({info: true,  markdownView: side });
-    }
-    else {
+      this.setState({ info: true, markdownView: side });
+    } else {
       p.set("rightSideWidth", 0);
       p.set("footerHeight", 0);
       this.setState({ info: false });
@@ -340,7 +351,7 @@ export default class App extends React.Component<
   }
 
   private overlay() {
-    const offset = 16;
+    const offset = 20;
     return (
       <Layout
         name={"Layout.intro.example.overlay"}

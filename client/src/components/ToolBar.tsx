@@ -108,8 +108,6 @@ export default class ToolBar extends React.Component<IToolBarProps, IToolBarStat
       if (e.name !== '') {
         const status = this.props.editHelper.status(e.name);
         if (status !== undefined) {
-        
-          // console.log(`ToolBar ${e.name} ${status}`);
           
           const color = (status === 0) ? cssColor.middle : ((status === Status.down) ? cssColor.light : cssColor.darkMiddle);
           const background = status === Status.up ? cssColor.light : 'transparent';

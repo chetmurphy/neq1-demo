@@ -186,7 +186,6 @@ export default class EditableText extends React.Component<IEditableTextProps, IE
 
     if (this.root) {
       this.data.alpha = (this.root.offsetWidth / len) / fontSize;
-      // console.log(`calculateFontSize alpha: ${this.data.alpha!}`)
     }
 
     const tw = () => {
@@ -213,11 +212,6 @@ export default class EditableText extends React.Component<IEditableTextProps, IE
 
     this.data.fontSize = fontSize;
     return fontSize;
-
-    // const x1 = 2 * width / len;
-    // const x2 = 0.8 * height;
-    // console.log (`calculateFontSize ${x1} ${x2}`)
-    // return Math.max(x1, x2);
   }
 }
 
