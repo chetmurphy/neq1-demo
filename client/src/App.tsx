@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"
 
 import * as Sentry from "@sentry/browser";
 
@@ -29,7 +29,9 @@ import cssColor from "./assets/colors";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NavBar from "./components/NavBar";
 import ToolBar from "./components/ToolBar";
+import Dashboard, {dashboardMarkdown} from "./pages/dashboard/Dashboard";
 import Diagram, { diagramMarkdown } from "./pages/diagram/Diagram";
+import Flying, { flyingMarkdown } from "./pages/flying/Flying";
 // import DeskTop from './desktop/DeskTop';
 // import Editable from './editable/Editable';
 // import Grid from './grid/Grid';
@@ -53,7 +55,6 @@ import {
   MdRedo,
   MdUndo
 } from "react-icons/md";
-import {} from "react-layout-generator";
 
 // tslint:disable-next-line:variable-name
 const Title = styled.h2`
@@ -230,6 +231,26 @@ export default class App extends React.Component<
                   ),
                   markdown: diagramMarkdown,
                   name: "Diagram"
+                },
+                {
+                  component: (
+                    <Flying
+                      editHelper={this.getEditHelper}
+                      onUpdate={this.onUpdate}
+                    />
+                  ),
+                  markdown: flyingMarkdown,
+                  name: "Game"
+                },
+                {
+                  component: (
+                    <Dashboard
+                      editHelper={this.getEditHelper}
+                      onUpdate={this.onUpdate}
+                    />
+                  ),
+                  markdown: dashboardMarkdown,
+                  name: "Dashboard"
                 }
                 // { component: <Solitaire2 editHelper={this.getEditHelper} />, name: 'Solitaire2' },
                 // { component: <Grid editHelper={this.getEditHelper} />, name: 'Grid' },
@@ -287,6 +308,7 @@ export default class App extends React.Component<
           </div>
 
           <div data-layout={{ name: "content" }}>{this.state.app}</div>
+
         </Layout>
         {this.overlay()}
       </ErrorBoundary>
@@ -332,21 +354,36 @@ export default class App extends React.Component<
 
   private updateInfo(resize?: boolean) {
     const p = this.g.params();
-    if (!this.state.info || resize) {
-      let side = false;
-      if (window.innerHeight < window.innerWidth) {
-        p.set("rightSideWidth", 0.3 * window.innerWidth);
-        p.set("footerHeight", 0);
-        side = true;
-      } else {
-        p.set("footerHeight", 0.3 * window.innerHeight);
-        p.set("rightSideWidth", 0);
+    if (resize) {
+      if (this.state.info) {
+        let side = false;
+        if (window.innerHeight < window.innerWidth) {
+          p.set("rightSideWidth", 0.3 * window.innerWidth);
+          p.set("footerHeight", 0);
+          side = true;
+        } else {
+          p.set("footerHeight", 0.3 * window.innerHeight);
+          p.set("rightSideWidth", 0);
+        }
+        this.setState({ info: true, markdownView: side });
       }
-      this.setState({ info: true, markdownView: side });
     } else {
-      p.set("rightSideWidth", 0);
-      p.set("footerHeight", 0);
-      this.setState({ info: false });
+      if (!this.state.info) {
+        let side = false;
+        if (window.innerHeight < window.innerWidth) {
+          p.set("rightSideWidth", 0.3 * window.innerWidth);
+          p.set("footerHeight", 0);
+          side = true;
+        } else {
+          p.set("footerHeight", 0.3 * window.innerHeight);
+          p.set("rightSideWidth", 0);
+        }
+        this.setState({ info: true, markdownView: side });
+      } else {
+        p.set("rightSideWidth", 0);
+        p.set("footerHeight", 0);
+        this.setState({ info: false });
+      }
     }
   }
 
