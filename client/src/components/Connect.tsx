@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-// These paths are for the examples only. In an application you
-// would get these by importing from 'react-layout-generator'
 import { 
   Block, 
   connectPoint, 
@@ -9,7 +7,7 @@ import {
   IOrigin, 
   lineRectIntersection, 
   PositionRef 
-} from 'react-layout-generator'
+} from '@neq1/core'
 
 export interface IConnectRect {
   ref: PositionRef

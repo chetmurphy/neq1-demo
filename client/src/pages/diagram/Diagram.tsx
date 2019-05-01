@@ -1,19 +1,20 @@
 import * as React from "react";
 
 import {
-
   Block,
   Blocks,
   Generator,
   ICreate,
   IEditHelperProps,
   IGenerator,
-  Layout,
   OverflowOptions,
   Params,
   ServiceOptions,
   Status
-} from "react-layout-generator";
+} from "@neq1/core";
+
+import {Layout} from '@neq1/layout'
+
 import { Connect } from 'src/components/Connect';
 
 // tslint:disable-next-line:no-var-requires
@@ -160,12 +161,12 @@ export default class Diagram extends React.Component<IDiagramProps, IDiagramStat
   public init(g: IGenerator): Blocks {
     const blocks = g.blocks()
 
-    if (this._params.changed() || g.containerChanged()) {
-      // update Layout for each update
-      blocks.map.forEach(block => {
-        block.touch()
-      })
-    }
+    // if (this._params.changed() || g.containerChanged()) {
+    //   // update Layout for each update
+    //   blocks.map.forEach(block => {
+    //     block.touch()
+    //   })
+    // }
 
     return blocks
   }

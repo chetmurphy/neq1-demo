@@ -12,15 +12,24 @@ import styled from "styled-components";
 import "highlight.js/styles/vs.css";
 
 import {
-  desktopGenerator,
   EditHelper,
   IGenerator,
-  IMetaDataArgs,
-  Layout,
   OverflowOptions,
-  Panel,
   ServiceOptions
-} from "react-layout-generator";
+} from "@neq1/core";
+
+import {
+  desktopGenerator
+} from "@neq1/desktop-generator"
+
+import {
+  Layout
+} from "@neq1/layout";
+
+import {
+  IMetaDataArgs,
+  Panel
+} from "@neq1/panel";
 
 // Examples
 import cssColor from "./assets/colors";
@@ -47,7 +56,9 @@ import {
   FaRegEdit,
   FaRegSave
 } from "react-icons/fa";
-import { IconBaseProps } from "react-icons/lib/iconBase";
+
+import { IconBaseProps } from "react-icons/lib/esm";
+
 import {
   MdContentCopy,
   MdContentCut,
@@ -81,7 +92,7 @@ export const Button = styled.button`
 `;
 
 Sentry.init({
-  release: "react-layout-generator@0.5.11",
+  release: "@neq1",
   dsn: "https://990e004f6c634ea2ac0cec00daa87f3b@sentry.io/1409701"
 });
 
@@ -170,7 +181,7 @@ export default class App extends React.Component<
             style={{ backgroundColor: cssColor.dark, textAlign: "center" }}
           >
             {(args: IMetaDataArgs) => (
-              <Title>React Layout Generator Examples</Title>
+              <Title>N=1 Examples</Title>
             )}
           </Panel>
 
@@ -440,7 +451,7 @@ export default class App extends React.Component<
               height: 16
             }
           }}
-          href="https://github.com/chetmurphy/react-layout-generator"
+          href="https://github.com/chetmurphy/neq1"
         >
           <FaGithub
             style={{
@@ -463,7 +474,7 @@ export default class App extends React.Component<
               height: 16
             }
           }}
-          href="https://chetmurphy.github.io/react-layout-generator/"
+          href="https://chetmurphy.github.io/neq1/"
         >
           <FaBook
             style={{

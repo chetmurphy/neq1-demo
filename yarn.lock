@@ -2,3 +2,169 @@
 # yarn lockfile v1
 
 
+"@neq1/core@^1.0.9-alpha.1":
+  version "1.0.9-alpha.1"
+  resolved "http://localhost:4873/@neq1%2fcore/-/core-1.0.9-alpha.1.tgz#f6cf96692c569c84dbe68cfb8008ab3f49b4f583"
+  integrity sha512-t1EhudgJ3v/btppYLg+23rtE4yCPfidEMeaDNrr/wslsmpPT32NBJ9qXjHUe8Vewnj6jbtkrog66DIHJKjNqjw==
+  dependencies:
+    debug "^4.1.1"
+    deep-equal "^1.0.1"
+    performance-now "^2.1.0"
+
+"@neq1/dnd@^1.0.9-alpha.1":
+  version "1.0.9-alpha.1"
+  resolved "http://localhost:4873/@neq1%2fdnd/-/dnd-1.0.9-alpha.1.tgz#1ce0f22e96608fd00e1708b26cdc604232647a53"
+  integrity sha512-8oeSO+IYhBVeE3CtvBBpXffG0skQlFMozgmSszDWiTAw9oQYOuARvHeNo3QDc4lJWOupdnmOhbhrb18eNYCT1Q==
+  dependencies:
+    "@neq1/core" "^1.0.9-alpha.1"
+    debug "^4.1.1"
+    prop-types "^15.7.2"
+    react-resize-detector "^4.0.1"
+
+"@neq1/editors@^1.0.9-alpha.1":
+  version "1.0.9-alpha.1"
+  resolved "http://localhost:4873/@neq1%2feditors/-/editors-1.0.9-alpha.1.tgz#efa6a0c5e28a01ef76730e11b4a96b729deca3c2"
+  integrity sha512-R1WTrZsQMKY/4P1t/5wun1iGyjF12NSBBoYrC/D5YfZPnHeKkprNWmpOQGY0kSDPMhATNZ+ZYgDXbnbaNclwCw==
+  dependencies:
+    "@neq1/core" "^1.0.9-alpha.1"
+    debug "^4.1.1"
+
+"@neq1/layout@^1.0.9-alpha.1":
+  version "1.0.9-alpha.1"
+  resolved "http://localhost:4873/@neq1%2flayout/-/layout-1.0.9-alpha.1.tgz#cef2d9ece7e9528058c41efe561c5b88acf3d7fe"
+  integrity sha512-ZdEYd6mI9LimO7HCXWuZgDwKh6lh80qd3vFYXVmWxt+9pcUU2vzS4o7KNtKvSv+k0mRORthV66vVCwEJ+VY9aA==
+  dependencies:
+    "@neq1/core" "^1.0.9-alpha.1"
+    "@neq1/dnd" "^1.0.9-alpha.1"
+    "@neq1/editors" "^1.0.9-alpha.1"
+    "@neq1/panel" "^1.0.9-alpha.1"
+    "@neq1/styles" "^1.0.9-alpha.1"
+    debug "^4.1.1"
+    performance-now "^2.1.0"
+    raf "^3.4.1"
+    react "^16.8.6"
+    react-resize-detector "^4.1.3"
+
+"@neq1/panel@^1.0.9-alpha.1":
+  version "1.0.9-alpha.1"
+  resolved "http://localhost:4873/@neq1%2fpanel/-/panel-1.0.9-alpha.1.tgz#9d34c72413e85e49dbb51fb1d34d5fa6567b1e70"
+  integrity sha512-pVBZT/SkGGOwUYaLCTIwQ8e0v0vrlivIZf68aMYAWsKUZjT0fI9UlDd5CJt12DJ20fSnSz1MPTFKk3sSwO8/Sg==
+  dependencies:
+    "@neq1/core" "^1.0.9-alpha.1"
+    deep-equal "^1.0.1"
+
+"@neq1/styles@^1.0.9-alpha.1":
+  version "1.0.9-alpha.1"
+  resolved "http://localhost:4873/@neq1%2fstyles/-/styles-1.0.9-alpha.1.tgz#4c95abd900c22e0e46e48555c938e6494746f0a7"
+  integrity sha512-OrI8c2PQ21ZdXWZdqYqHOi/sOe4kUYnYtqaWyFz9bmmOhoxsAdL17wOd519OblFAQ4yVGuO27plDoL8SITZz8A==
+  dependencies:
+    "@neq1/core" "^1.0.9-alpha.1"
+
+debug@^4.1.1:
+  version "4.1.1"
+  resolved "http://localhost:4873/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
+  integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
+  dependencies:
+    ms "^2.1.1"
+
+deep-equal@^1.0.1:
+  version "1.0.1"
+  resolved "http://localhost:4873/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
+  integrity sha1-9dJgKStmDghO/0zbyfCK0yR0SLU=
+
+"js-tokens@^3.0.0 || ^4.0.0":
+  version "4.0.0"
+  resolved "http://localhost:4873/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
+  integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+
+lodash-es@^4.17.11:
+  version "4.17.11"
+  resolved "http://localhost:4873/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
+  integrity sha512-DHb1ub+rMjjrxqlB3H56/6MXtm1lSksDp2rA2cNWjG8mlDUYFhUj3Di2Zn5IwSU87xLv8tNIQ7sSwE/YOX/D/Q==
+
+lodash@^4.17.11:
+  version "4.17.11"
+  resolved "http://localhost:4873/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+
+loose-envify@^1.1.0, loose-envify@^1.4.0:
+  version "1.4.0"
+  resolved "http://localhost:4873/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
+  integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
+  dependencies:
+    js-tokens "^3.0.0 || ^4.0.0"
+
+ms@^2.1.1:
+  version "2.1.1"
+  resolved "http://localhost:4873/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
+  integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
+
+object-assign@^4.1.1:
+  version "4.1.1"
+  resolved "http://localhost:4873/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+  integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
+
+performance-now@^2.1.0:
+  version "2.1.0"
+  resolved "http://localhost:4873/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
+  integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
+
+prop-types@^15.6.2, prop-types@^15.7.2:
+  version "15.7.2"
+  resolved "http://localhost:4873/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
+  integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
+  dependencies:
+    loose-envify "^1.4.0"
+    object-assign "^4.1.1"
+    react-is "^16.8.1"
+
+raf-schd@^4.0.0:
+  version "4.0.0"
+  resolved "http://localhost:4873/raf-schd/-/raf-schd-4.0.0.tgz#9855756c5045ff4ed4516e14a47719387c3c907b"
+  integrity sha512-m7zq0JkIrECzw9mO5Zcq6jN4KayE34yoIS9hJoiZNXyOAT06PPA8PrR+WtJIeFW09YjUfNkMMN9lrmAt6BURCA==
+
+raf@^3.4.1:
+  version "3.4.1"
+  resolved "http://localhost:4873/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
+  integrity sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
+  dependencies:
+    performance-now "^2.1.0"
+
+react-is@^16.8.1:
+  version "16.8.6"
+  resolved "http://localhost:4873/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
+  integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
+
+react-resize-detector@^4.0.1, react-resize-detector@^4.1.3:
+  version "4.1.3"
+  resolved "http://localhost:4873/react-resize-detector/-/react-resize-detector-4.1.3.tgz#cada852b63b07453e11c9078eb571b9c4bc9d48f"
+  integrity sha512-tzVDVFxhUVdTjxyR1OqNggkbFAA7srawgwhcm4XQjyGq/R8M13MiceI+4C7xfzHqaKk0Oq7ErIXexGGSgQEKcQ==
+  dependencies:
+    lodash "^4.17.11"
+    lodash-es "^4.17.11"
+    prop-types "^15.7.2"
+    raf-schd "^4.0.0"
+    resize-observer-polyfill "^1.5.1"
+
+react@^16.8.6:
+  version "16.8.6"
+  resolved "http://localhost:4873/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
+  integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.13.6"
+
+resize-observer-polyfill@^1.5.1:
+  version "1.5.1"
+  resolved "http://localhost:4873/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
+
+scheduler@^0.13.6:
+  version "0.13.6"
+  resolved "http://localhost:4873/scheduler/-/scheduler-0.13.6.tgz#466a4ec332467b31a91b9bf74e5347072e4cd889"
+  integrity sha512-IWnObHt413ucAYKsD9J1QShUKkbKLQQHdxRyw73sw4FN26iWr3DY/H34xGPe4nmL1DwXyWmSWmMrA9TfQbE/XQ==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"

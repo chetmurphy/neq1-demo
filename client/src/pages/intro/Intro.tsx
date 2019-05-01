@@ -3,15 +3,24 @@ import styled from "styled-components";
 
 import {
   Block,
-  dynamicGenerator,
   IEditHelperProps,
-  Layout,
   OverflowOptions,
-  pathHook,
   Queue,
   ServiceOptions,
   Status
-} from "react-layout-generator";
+} from "@neq1/core";
+
+import {
+  Layout,
+} from '@neq1/layout'
+
+import {
+  pathHook
+} from '@neq1/path-hook'
+
+import {
+  dynamicGenerator,
+} from '@neq1/dynamic-generator'
 
 // tslint:disable-next-line:no-var-requires
 const introMarkdownFile = require("./description.md");

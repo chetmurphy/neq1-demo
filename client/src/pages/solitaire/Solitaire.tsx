@@ -1,12 +1,13 @@
 import * as React from 'react'
 
 import {
-  DragDrop,
   IEditHelperProps,
   IGenerator,
-  Layout,
   ServiceOptions
-} from 'react-layout-generator'
+} from '@neq1/core'
+
+import {DragDrop} from '@neq1/dnd'
+import {Layout} from '@neq1/layout'
 
 import { cardPath } from './Card'
 import FoundationStack from './FoundationStack'

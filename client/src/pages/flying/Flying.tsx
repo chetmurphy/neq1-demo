@@ -2,17 +2,29 @@ import * as React from "react";
 
 import {
   Block,
-  dynamicGenerator,
   IEditHelperProps,
-  IMetaDataArgs,
-  Layout,
   OverflowOptions,
-  Panel,
-  pathHook,
   Queue,
   ServiceOptions,
   Status
-} from "react-layout-generator";
+} from "@neq1/core";
+
+import {
+  Layout,
+} from '@neq1/layout'
+
+import {
+  IMetaDataArgs,
+  Panel,
+} from '@neq1/panel'
+
+import {
+  pathHook
+} from '@neq1/path-hook'
+
+import {
+  dynamicGenerator,
+} from '@neq1/dynamic-generator'
  
 import { useFatBird } from './fatBird';
 

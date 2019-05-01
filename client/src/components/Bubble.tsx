@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { 
   IOrigin,
   ISize
-} from 'react-layout-generator'
+} from '@neq1/core'
 
 interface IProps {
   containersize: ISize;

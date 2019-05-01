@@ -3,20 +3,29 @@ import styled from 'styled-components';
 
 import {
   Block,
-  Blocks, 
+  Blocks,
   Generator,
-  ICreate, 
+  ICreate,
   IDataLayout,
   IGenerator,
   IGenericProps,
-  IMetaDataArgs,
   ISize,
-  Layout,
-  Panel, 
   Params,
-  PositionRef,
-  updateParamLocation,
-} from 'react-layout-generator'
+  PositionRef
+} from '@neq1/core'
+
+import {
+  updateParamLocation
+} from '@neq1/editors'
+
+import {
+  IMetaDataArgs,
+  Panel
+} from '@neq1/panel'
+
+import {
+  Layout
+} from '@neq1/layout'
 
 import cssColor from '../assets/colors';
 
@@ -66,11 +75,11 @@ export default class Table extends React.Component<ITableProps> {
       >
         <Panel data-layout={{ name: 'title' }} style={{ backgroundColor: 'black' }} >
           {(args: IMetaDataArgs) => (
-              <>
-                <Title>{this.props.name}</Title>
-                {this.createRows()}
-              </>
-         )}
+            <>
+              <Title>{this.props.name}</Title>
+              {this.createRows()}
+            </>
+          )}
         </Panel>
       </Layout>
     );
@@ -89,12 +98,12 @@ export default class Table extends React.Component<ITableProps> {
 
     const blocks = g.blocks();
 
-    if (this.params.changed() || g.containerChanged()) {
-      // update Layout for each update
-      blocks.map.forEach((block) => {
-        block.touch();
-      });
-    }
+    // if (this.params.changed() || g.containerChanged()) {
+    //   // update Layout for each update
+    //   blocks.map.forEach((block) => {
+    //     block.touch();
+    //   });
+    // }
 
     if (containersize) {
 

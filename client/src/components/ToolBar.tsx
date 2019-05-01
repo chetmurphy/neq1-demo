@@ -1,20 +1,18 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-// These paths are for the examples only. In an application you
-// would get these by importing from 'react-layout-generator'
-
 import {
   EditHelper,
   IDataLayout,
   IEditTool,
   IGenerator,
   ISize,
-  Layout,
   Params,
-  rowsGenerator,
-  Status, 
-} from 'react-layout-generator'
+  Status
+} from '@neq1/core'
+
+import {Layout} from '@neq1/layout'
+import {rowsGenerator} from '@neq1/rows-generator'
 
 import cssColor from '../assets/colors';
 

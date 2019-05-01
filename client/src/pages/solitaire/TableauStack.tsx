@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { IGenerator, IPoint, ISize } from 'react-layout-generator'
+import { IGenerator, IPoint, ISize } from '@neq1/core'
 import { cardPath, Face, gCards } from './Card'
 import Stack, { isRedSuite } from './Stack'
 import Stock from './Stock'

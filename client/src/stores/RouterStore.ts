@@ -13,7 +13,7 @@ import { IExtendedRoute, routes } from '../router/routes';
 
 import database from './database/Database';
 
-import { IEditHelperProps } from 'react-layout-generator';
+import { IEditHelperProps } from '@neq1/core';
 import { eventBus, subscribe } from '../utils/EventBus';
 import Store from './Store';
 

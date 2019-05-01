@@ -7,7 +7,7 @@ import {
   IGenerator,
   IPoint,
   IRect
-} from 'react-layout-generator'
+} from '@neq1/core'
 
 
 // tslint:disable-next-line:variable-name
@@ -56,13 +56,15 @@ export default class Note extends React.Component<INoteProps, INoteState> {
     const deltaX = x - this.startOrigin.x;
     const deltaY = y - this.startOrigin.y;
 
+
+    const r = this.props.block!.rect
     // update
-    this.props.block!.update({
+    this.props.block!.rect = {
       x: this.startLocation.x + deltaX,
       y: this.startLocation.y + deltaY,
-      width: ,
-      height: 
-    });
+      width: r.width,
+      height: r.height
+    }
 
     // this.setState({update: this.state.update + 1});
     if (this.props.update) { this.props.update(); }

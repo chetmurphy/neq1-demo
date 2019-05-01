@@ -1,4 +1,4 @@
-import { IGenerator } from 'react-layout-generator'
+import { IGenerator } from '@neq1/core'
 import { gCards } from './Card'
 import Stack, { isRedSuite } from './Stack'
 

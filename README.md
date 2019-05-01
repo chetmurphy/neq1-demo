@@ -1,2 +1,2 @@
 # RLG-Demo
-Demo for react-layout-generator
+Demo for N=1 system
