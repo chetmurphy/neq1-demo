@@ -12,15 +12,16 @@ import styled from "styled-components";
 import "highlight.js/styles/vs.css";
 
 import {
-  desktopGenerator,
   EditHelper,
   IGenerator,
-  IMetaDataArgs,
-  Layout,
-  OverflowOptions,
-  Panel,
   ServiceOptions
-} from "react-layout-generator";
+} from "@neq1/core";
+
+import {desktopGenerator} from "@neq1/desktop-generator";
+
+import {Layout} from "@neq1/layout";
+
+import {IMetaDataArgs, Panel} from "@neq1/panel";
 
 // Examples
 import cssColor from "./assets/colors";
@@ -162,8 +163,8 @@ export default class App extends React.Component<
           name="framework"
           service={ServiceOptions.none}
           g={this.g}
-          overflowX={OverflowOptions.hidden}
-          overflowY={OverflowOptions.hidden}
+          overflowX={'hidden'}
+          overflowY={'hidden'}
         >
           <Panel
             data-layout={{ name: "title" }}
@@ -393,8 +394,8 @@ export default class App extends React.Component<
       <Layout
         name={"Layout.intro.example.overlay"}
         g={this.g}
-        overflowX={OverflowOptions.hidden}
-        overflowY={OverflowOptions.hidden}
+        overflowX={'hidden'}
+        overflowY={'hidden'}
         style={{ pointerEvents: "none" }}
       >
         <div

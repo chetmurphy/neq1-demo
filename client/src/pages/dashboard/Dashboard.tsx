@@ -4,18 +4,22 @@ import * as React from "react";
 import styled from "styled-components";
 
 import {
-  dashboardGenerator,
   IEditHelperProps,
-  IMetaDataArgs,
   ISize,
-  Layout,
-  Panel,
   Params,
   ParamValue,
   rectSize,
   ServiceOptions,
   Status
-} from "react-layout-generator";
+} from "@neq1/core";
+
+import {dashboardGenerator} from "@neq1/dashboard-generator";
+
+import {IMetaDataArgs, Panel} from "@neq1/panel";
+
+import {Layout} from "@neq1/layout";
+
+
 import { BarChart } from './d3/Bar';
 
 interface IProps {

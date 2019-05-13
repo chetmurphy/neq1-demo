@@ -1,20 +1,28 @@
 import * as React from "react";
 
-import {
+import styled from "styled-components";
 
+import {
   Block,
   Blocks,
   Generator,
   ICreate,
   IEditHelperProps,
   IGenerator,
-  Layout,
-  OverflowOptions,
   Params,
   ServiceOptions,
   Status
-} from "react-layout-generator";
+} from "@neq1/core";
+
 import { Connect } from 'src/components/Connect';
+
+import {Layout} from "@neq1/layout";
+
+// tslint:disable-next-line:variable-name
+const Item = styled.h2`
+  position: 'absolute';
+  user-select: 'none';
+`;
 
 // tslint:disable-next-line:no-var-requires
 const diagramMarkdownFile = require("./description.md");
@@ -88,8 +96,8 @@ export default class Diagram extends React.Component<IDiagramProps, IDiagramStat
         service={this._edit ? ServiceOptions.edit : ServiceOptions.none}
         animate={{ active: false }}
         g={this._g}
-        overflowX={OverflowOptions.hidden}
-        overflowY={OverflowOptions.hidden}
+        overflowX={'hidden'}
+        overflowY={'hidden'}
       >
 
         <div
@@ -98,7 +106,7 @@ export default class Diagram extends React.Component<IDiagramProps, IDiagramStat
             location: { left: '50%', top: '10%', width: '140u', height: '24u' }, 
           }}
         >
-          <span>block 1</span>
+          <Item>block 1</Item>
         </div>
 
         <div
@@ -107,7 +115,7 @@ export default class Diagram extends React.Component<IDiagramProps, IDiagramStat
             location: { left: '40%', top: '25%', width: '140u', height: '24u' },
           }}
         >
-          <span>block 2</span>
+          <Item>block 2</Item>
         </div>
 
         <div
@@ -116,7 +124,7 @@ export default class Diagram extends React.Component<IDiagramProps, IDiagramStat
             location: { left: '60%', top: '40%', width: '140u', height: '24u' },
           }}
         >
-          <span>block 3 - Click the info circle.</span>
+          <Item>block 3 - Click the info circle.</Item>
         </div>
 
         <div
@@ -126,7 +134,7 @@ export default class Diagram extends React.Component<IDiagramProps, IDiagramStat
             location: { left: '30%', top: '60%', width: '140u', height: '24u' },
           }}
         >
-          <span>block 4 - Turn on edit and drag me.</span>
+         <Item>block 4 - Turn on edit and drag me.</Item>
 
         </div>
 
@@ -159,13 +167,6 @@ export default class Diagram extends React.Component<IDiagramProps, IDiagramStat
 
   public init(g: IGenerator): Blocks {
     const blocks = g.blocks()
-
-    if (this._params.changed() || g.containerChanged()) {
-      // update Layout for each update
-      blocks.map.forEach(block => {
-        block.touch()
-      })
-    }
 
     return blocks
   }

@@ -1,6 +1,6 @@
 import { Route } from "router5";
 
-import { IEditHelperProps } from "react-layout-generator";
+import { IEditHelperProps } from "@neq1/core";
 import { introJSX } from "../pages/intro/Intro";
 
 export interface IRouteNavigationProps {

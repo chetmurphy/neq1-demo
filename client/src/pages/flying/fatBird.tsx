@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Block } from 'react-layout-generator'
+import { Block } from '@neq1/core'
 
 import { useArrowKeysMap } from './useArrowKeysMap'
 
@@ -33,7 +33,7 @@ export function useFatBird(block: Block) {
       r.x += speed
     }
 
-    block.update(r)
+    block.rect = r
 
   })
 

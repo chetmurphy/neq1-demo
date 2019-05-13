@@ -1,6 +1,8 @@
 import * as React from 'react'
 
-import { Draggable, IGenerator } from 'react-layout-generator'
+import { IGenerator } from '@neq1/core'
+import { Draggable} from '@neq1/dnd'
+
 import Card, { Face } from './Card'
 
 export default class Stack {

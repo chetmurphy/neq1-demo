@@ -11,7 +11,7 @@ import {
   ISize, 
   Params,
   ParamValue,
-} from 'react-layout-generator'
+} from '@neq1/core'
 
 export default function solitaireGenerator(gArgs: IGeneratorFunctionArgs) {
 

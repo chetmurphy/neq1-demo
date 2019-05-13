@@ -10,11 +10,13 @@ import {
   IEditTool,
   IGenerator,
   ISize,
-  Layout,
   Params,
-  rowsGenerator,
   Status, 
-} from 'react-layout-generator'
+} from '@neq1/core'
+
+import {Layout} from '@neq1/layout'
+
+import {rowsGenerator} from '@neq1/rows-generator'
 
 import cssColor from '../assets/colors';
 

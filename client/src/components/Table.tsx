@@ -9,14 +9,17 @@ import {
   IDataLayout,
   IGenerator,
   IGenericProps,
-  IMetaDataArgs,
   ISize,
-  Layout,
-  Panel, 
   Params,
-  PositionRef,
-  updateParamLocation,
-} from 'react-layout-generator'
+  PositionRef
+} from '@neq1/core'
+
+import {IMetaDataArgs,Panel} from '@neq1/panel'
+
+import {Layout} from '@neq1/layout'
+
+import {updateParamLocation} from '@neq1/editors'
+
 
 import cssColor from '../assets/colors';
 
@@ -88,13 +91,6 @@ export default class Table extends React.Component<ITableProps> {
     // const footerHeight = this.params.get('footerHeight') as number;
 
     const blocks = g.blocks();
-
-    if (this.params.changed() || g.containerChanged()) {
-      // update Layout for each update
-      blocks.map.forEach((block) => {
-        block.touch();
-      });
-    }
 
     if (containersize) {
 

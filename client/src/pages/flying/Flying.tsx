@@ -2,19 +2,25 @@ import * as React from "react";
 
 import {
   Block,
-  dynamicGenerator,
   IEditHelperProps,
-  IMetaDataArgs,
-  Layout,
-  OverflowOptions,
-  Panel,
-  pathHook,
   Queue,
   ServiceOptions,
   Status
-} from "react-layout-generator";
+} from "@neq1/core";
+
+
+import {IMetaDataArgs, Panel} from "@neq1/panel";
+
+import {Layout} from "@neq1/layout";
+
+import {pathHook} from "@neq1/path-hook";
+
+import {dynamicGenerator} from "@neq1/dynamic-generator";
+
  
 import { useFatBird } from './fatBird';
+
+
 
 // tslint:disable-next-line:no-var-requires
 const flyingMarkdownFile = require("./description.md");
@@ -142,8 +148,8 @@ export default class Flying extends React.Component<IFlyingProps, IFlyingState> 
         service={this._edit ? ServiceOptions.edit : ServiceOptions.none}
         animate={{ active: true }}
         g={this._g}
-        overflowX={OverflowOptions.hidden}
-        overflowY={OverflowOptions.hidden}
+        overflowX={'hidden'}
+        overflowY={'hidden'}
       >
         {this.content()}
       </Layout>
@@ -204,7 +210,7 @@ export default class Flying extends React.Component<IFlyingProps, IFlyingState> 
           key={name}
           data-layout={{
             name,
-            origin: { x: 0, y: 0 },
+            origin: { x: 0, y: -1 },
             location: { left: j*10, bottom: 0, width: 50, height: v },
             layer: 2
           }}

@@ -3,15 +3,17 @@ import styled from "styled-components";
 
 import {
   Block,
-  dynamicGenerator,
   IEditHelperProps,
-  Layout,
-  OverflowOptions,
-  pathHook,
   Queue,
   ServiceOptions,
   Status
-} from "react-layout-generator";
+} from "@neq1/core";
+
+import {dynamicGenerator} from "@neq1/dynamic-generator";
+
+import {pathHook} from "@neq1/path-hook";
+
+import {Layout} from "@neq1/layout";
 
 // tslint:disable-next-line:no-var-requires
 const introMarkdownFile = require("./description.md");
@@ -156,8 +158,8 @@ export default class Intro extends React.Component<
         service={this._edit ? ServiceOptions.edit : ServiceOptions.none}
         animate={{ active: true }}
         g={this._g}
-        overflowX={OverflowOptions.hidden}
-        overflowY={OverflowOptions.hidden}
+        overflowX={'hidden'}
+        overflowY={'hidden'}
       >
         {this.content()}
       </Layout>
@@ -213,8 +215,8 @@ export default class Intro extends React.Component<
           key={name}
           data-layout={{
             name,
-            origin: { x: 0.5, y: 0.5 },
-            location: { left: 0, top: 0, width: 250, height: "100u" },
+            origin: { x: -.5, y: 0.5 },
+            location: { left: 0, top: 0, width: 250, height: 30 },
             layer: 1
           }}
         >

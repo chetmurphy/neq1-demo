@@ -1,4 +1,4 @@
-import { IGenerator } from 'react-layout-generator';
+import { IGenerator } from '@neq1/core';
 import { Face } from '../solitaire/Card';
 import Stack from './Stack';
 import Stock from './Stock';

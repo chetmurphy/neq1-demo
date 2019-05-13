@@ -9,7 +9,7 @@ import {
   IOrigin, 
   lineRectIntersection, 
   PositionRef 
-} from 'react-layout-generator'
+} from '@neq1/core'
 
 export interface IConnectRect {
   ref: PositionRef

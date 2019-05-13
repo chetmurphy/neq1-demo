@@ -1,14 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import {
-  Block,
-  IGenerator,
-  IPoint,
-  IRect
-} from 'react-layout-generator'
-
+import { Block, IGenerator, IPoint, IRect } from "@neq1/core";
 
 // tslint:disable-next-line:variable-name
 const Container = styled.div`
@@ -18,7 +12,7 @@ const Container = styled.div`
   border-radius: 5px;
   background: linear-gradient(top, #f9d835, #f3961c);
   cursor: move;
-`
+`;
 interface INoteProps {
   container?: IRect;
   block?: Block;
@@ -40,7 +34,7 @@ export default class Note extends React.Component<INoteProps, INoteState> {
     super(props);
     this.state = {
       update: 0
-    }
+    };
   }
 
   public render() {
@@ -48,24 +42,29 @@ export default class Note extends React.Component<INoteProps, INoteState> {
       <Container {...this.props} onMouseDown={this.onMouseDown}>
         {this.props.children}
       </Container>
-    )
+    );
   }
 
   private moveUpdate(x: number, y: number) {
-    // compute the relative distance
-    const deltaX = x - this.startOrigin.x;
-    const deltaY = y - this.startOrigin.y;
+    if (this.props.block) {
+      // compute the relative distance
+      const deltaX = x - this.startOrigin.x;
+      const deltaY = y - this.startOrigin.y;
 
-    // update
-    this.props.block!.update({
-      x: this.startLocation.x + deltaX,
-      y: this.startLocation.y + deltaY,
-      width: ,
-      height: 
-    });
+      const r = this.props.block.rect;
+      // update
+      this.props.block.rect = {
+        x: this.startLocation.x + deltaX,
+        y: this.startLocation.y + deltaY,
+        width: r.width,
+        height: r.height
+      };
+    }
 
     // this.setState({update: this.state.update + 1});
-    if (this.props.update) { this.props.update(); }
+    if (this.props.update) {
+      this.props.update();
+    }
   }
 
   private onMouseDown = (event: React.MouseEvent) => {
@@ -74,11 +73,11 @@ export default class Note extends React.Component<INoteProps, INoteState> {
     // capture mouse
     this.addEventListeners();
 
-    // initialize 
-    this.startOrigin = { x: event.pageX, y: event.pageY }
+    // initialize
+    this.startOrigin = { x: event.pageX, y: event.pageY };
     const r = this.props.block!.rect;
     this.startLocation = { x: r.x, y: r.y };
-  }
+  };
 
   private onHtmlMouseMove = (event: MouseEvent) => {
     if (event) {
@@ -86,22 +85,22 @@ export default class Note extends React.Component<INoteProps, INoteState> {
       event.stopPropagation();
       this.moveUpdate(event.pageX, event.pageY);
     }
-  }
+  };
 
   private onHtmlMouseUp = (event: MouseEvent) => {
     if (event) {
       event.preventDefault();
-      this.removeEventListeners()
+      this.removeEventListeners();
     }
-  }
+  };
 
   private addEventListeners = () => {
-    document.addEventListener('mouseup', this.onHtmlMouseUp);
-    document.addEventListener('mousemove', this.onHtmlMouseMove);
-  }
+    document.addEventListener("mouseup", this.onHtmlMouseUp);
+    document.addEventListener("mousemove", this.onHtmlMouseMove);
+  };
 
   private removeEventListeners = () => {
-    document.removeEventListener('mouseup', this.onHtmlMouseUp);
-    document.removeEventListener('mousemove', this.onHtmlMouseMove);
-  }
+    document.removeEventListener("mouseup", this.onHtmlMouseUp);
+    document.removeEventListener("mousemove", this.onHtmlMouseMove);
+  };
 }

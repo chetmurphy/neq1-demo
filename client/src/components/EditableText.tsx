@@ -7,7 +7,7 @@ import {
   IOrigin,
   ISize,
   Params
-} from 'react-layout-generator'
+} from '@neq1/core'
 
 interface IProps {
   containersize: ISize;

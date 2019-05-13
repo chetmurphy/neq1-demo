@@ -1,4 +1,4 @@
-import { IGenerator } from 'react-layout-generator'
+import { IGenerator } from '@neq1/core'
 import Deck from '../../algos/Deck'
 import Card, { Face, gCards } from './Card'
 import Stack from './Stack';
